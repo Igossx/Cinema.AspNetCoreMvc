@@ -1,4 +1,6 @@
-﻿using Cinema.Infrastructure.Persistence;
+﻿using Cinema.Domain.Entities;
+using Cinema.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,10 @@ namespace Cinema.Infrastructure.Extensions
         {
             services.AddDbContext<CinemaDbContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("CinemaDb")));
+
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<CinemaDbContext>();
         }
     }
 }

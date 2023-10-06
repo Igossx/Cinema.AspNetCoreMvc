@@ -2,7 +2,7 @@
 {
     public class Seat
     {
-        public int SeatId { get; set; }
+        public int Id { get; set; }
 
         public int ScreeningId { get; set; }
         public Screening Screening { get; set; } = default!;

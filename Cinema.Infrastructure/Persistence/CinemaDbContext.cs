@@ -1,9 +1,10 @@
 ﻿using Cinema.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Infrastructure.Persistence
 {
-    public class CinemaDbContext : DbContext
+    public class CinemaDbContext : IdentityDbContext
     {
         public CinemaDbContext(DbContextOptions<CinemaDbContext> options)
             : base(options) { }
@@ -12,7 +13,6 @@ namespace Cinema.Infrastructure.Persistence
         public DbSet<Screening> Screenings { get; set; }
         public DbSet<CinemaHall> CinemaHalls { get; set; }
         public DbSet<Seat> Seats { get; set; }
-        //public DbSet<User> Users { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Cart> Carts { get; set; }
 

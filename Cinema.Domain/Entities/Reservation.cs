@@ -2,15 +2,19 @@
 {
     public class Reservation
     {
-        public int ReservationId { get; set; }
+        public int Id { get; set; }
 
         public int ScreeningId { get; set; }
         public Screening Screening { get; set; } = default!;
-        //public string UserId { get; set; }
+
+        public string UserId { get; set; } = default!;
+        public ApplicationUser User { get; set; } = default!;
+
         public DateTime ReservationTime { get; set; }
 
         public List<Seat> ReservedSeats { get; set; } = new List<Seat>();
 
         public decimal TotalCost { get; set; } = 0;
+        public bool IsConfirmed { get; set; } = false;
     }
 }
