@@ -10,7 +10,7 @@
         public string UserId { get; set; } = default!;
         public ApplicationUser User { get; set; } = default!;
 
-        public DateTime ReservationTime { get; set; }
+        public DateTime ReservationTime { get; set; } = DateTime.UtcNow;
 
         public List<Seat> ReservedSeats { get; set; } = new List<Seat>();
 

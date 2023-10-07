@@ -1,6 +1,5 @@
 ﻿using Cinema.Domain.Enums;
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cinema.Domain.Entities
 {
@@ -8,6 +7,7 @@ namespace Cinema.Domain.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; } = default!;
+        public string EncodedTitle { get; set; } = default!;
         public string Description { get; set; } = default!;
         public DateTime ReleaseDate { get; set; }
         public int Duration { get; set; }
@@ -17,5 +17,7 @@ namespace Cinema.Domain.Entities
         public IFormFile? PosterImage { get; set; } // Przesłany plik graficzny plakatu
 
         public List<Screening> Screenings { get; set; } = new List<Screening>();
+
+        public void EncodeTitle() => EncodedTitle = Title.ToLower().Replace(" ", "-");
     }
 }
