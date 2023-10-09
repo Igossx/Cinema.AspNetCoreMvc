@@ -21,4 +21,9 @@
     <ProjectReference Include="..\Cinema.Infrastructure\Cinema.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Views\" />
+  </ItemGroup>
+
 </Project>

@@ -38,7 +38,7 @@ namespace Cinema.Infrastructure.Repositories
 
         public async Task<IEnumerable<CinemaHall>> GetAllAsync()
         {
-            return await _cinemaDbContext.CinemaHalls.ToListAsync();
+            return await _cinemaDbContext.CinemaHalls.AsNoTracking().ToListAsync();
         }
 
         public async Task<CinemaHall> GetByIdAsync(int id)

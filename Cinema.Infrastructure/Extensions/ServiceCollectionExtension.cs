@@ -1,5 +1,7 @@
 ﻿using Cinema.Domain.Entities;
+using Cinema.Domain.Interfaces;
 using Cinema.Infrastructure.Persistence;
+using Cinema.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +19,13 @@ namespace Cinema.Infrastructure.Extensions
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CinemaDbContext>();
+
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICinemaHallRepository, CinemaHallRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IScreeningRepository, ScreeningRepository>();
+            services.AddScoped<ISeatRepository, SeatRepository>();
         }
     }
 }
