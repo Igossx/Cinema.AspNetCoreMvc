@@ -1,5 +1,4 @@
 ﻿using Cinema.Domain.Enums;
-using Microsoft.AspNetCore.Http;
 
 namespace Cinema.Application.Movie.Queries
 {

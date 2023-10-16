@@ -1,4 +1,5 @@
-﻿using Cinema.Application.Movie.Queries.GetAllMovies;
+﻿using Cinema.Application.Movie.Commands.CreateMovie;
+using Cinema.Application.Movie.Queries.GetAllMovies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,16 +38,16 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
         // POST: MovieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(CreateMovieCommand command)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(command);
+
             }
-            catch
-            {
-                return View();
-            }
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: MovieController/Edit/5

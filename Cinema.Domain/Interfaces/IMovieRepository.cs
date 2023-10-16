@@ -10,5 +10,6 @@ namespace Cinema.Domain.Interfaces
         Task<Movie> GetByEncodedNameAsync(string encodedName);
         Task<Movie> GetByIdAsync(int id);
         Task<IEnumerable<Movie>> GetAllAsync();
+        Task<Movie?> GetByTitleAsync(string title);
     }
 }

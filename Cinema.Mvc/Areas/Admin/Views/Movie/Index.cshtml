@@ -12,7 +12,7 @@
         </div>
         <div class="col-6 text-right">
             <a asp-controller="Movie" asp-action="Create" class="btn btn-primary">
-                <i class="fas fa-plus"></i> &nbsp; Dodaj nowy produkt
+                <i class="fas fa-plus"></i> &nbsp; Dodaj nowy film
             </a>
         </div>
     </div>
@@ -25,11 +25,9 @@
             <tr>
                 <th>Id</th>
                 <th>@Html.DisplayNameFor(x => x.Title)</th>
-                <th>@Html.DisplayNameFor(x => x.Description)</th>
                 <th>@Html.DisplayNameFor(x => x.ReleaseDate)</th>
                 <th>@Html.DisplayNameFor(x => x.Duration)</th>
                 <th>@Html.DisplayNameFor(x => x.Category)</th>
-                <th>Picture</th>
                 <th></th>
             </tr>
         </thead>
@@ -39,10 +37,9 @@
                 <tr>
                     <td width="5%">@rowNumber</td>
                     <td width="10%">@obj.Title</td>
-                    <td width="25%">@obj.Description</td>
                     <td width="15%">@obj.ReleaseDate.ToString("yyyy-MM-dd")</td>
-                    <td width="15%">@obj.Duration</td>
-                    <td width="10%">@obj.Category</td>
+                    <td width="15%">@obj.Duration min.</td>
+                    <td width="15%">@obj.Category</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
                             <a asp-controller="Movie" asp-route-Id="@obj.EncodedTitle" asp-action="Edit" class="btn btn-warning mx-2">

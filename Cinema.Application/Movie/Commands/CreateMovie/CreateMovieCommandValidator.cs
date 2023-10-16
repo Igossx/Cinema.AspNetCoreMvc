@@ -13,8 +13,8 @@ namespace Cinema.Application.Movie.Commands.CreateMovie
                 .MaximumLength(20).WithMessage("Name should have maxium of 20 characters")
                 .Custom((value, context) =>
                 {
-                    var existingMovie = movieRepository.GetByEncodedNameAsync(value).Result;
-                    if (existingMovie is not null)
+                    var existingMovie = movieRepository.GetByTitleAsync(value).Result;
+                    if (existingMovie != null)
                     {
                         context.AddFailure($"{value} is not unique name for movie");
                     }
@@ -30,7 +30,8 @@ namespace Cinema.Application.Movie.Commands.CreateMovie
              .NotEmpty().WithMessage("Please enter category");
 
             RuleFor(m => m.Duration)
-                .NotEmpty().WithMessage("Please enter film duration");
+                .NotEmpty().WithMessage("Please enter film duration")
+                .InclusiveBetween(1, 200).WithMessage("Duration must be between 1 and 200 minutes.");
         }
     }
 }
