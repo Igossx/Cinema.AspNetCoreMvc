@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace Cinema.Application.Movie.Commands
 {
-    public class CreateMovieDto
+    public class UpdateMovieDto
     {
         public string Title { get; set; } = default!;
         public string Description { get; set; } = default!;
         public DateTime ReleaseDate { get; set; }
         public int Duration { get; set; }
         public FilmCategory Category { get; set; }
-        public IFormFile? PosterImage { get; set; } // Przesłany plik graficzny plakatu
+        public IFormFile? UpdatePosterImage { get; set; } // Przesłany plik graficzny plakatu
+        public string? ImagePath { get; set; } // Ścieżka do pliku graficznego plakatu
     }
 }

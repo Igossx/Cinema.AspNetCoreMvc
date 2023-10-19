@@ -4,6 +4,7 @@ namespace Cinema.Application.Movie.Queries
 {
     public class MovieDto
     {
+        public int Id { get; set; }
         public string Title { get; set; } = default!;
         public string EncodedTitle { get; set; } = default!;
         public string Description { get; set; } = default!;

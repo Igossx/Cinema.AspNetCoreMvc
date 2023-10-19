@@ -1,11 +1,11 @@
 ﻿using Cinema.Domain.Interfaces;
 using FluentValidation;
 
-namespace Cinema.Application.Movie.Commands.CreateMovie
+namespace Cinema.Application.Movie.Commands.UpdateMovie
 {
-    public class CreateMovieCommandValidator : AbstractValidator<CreateMovieCommand>
+    public class UpdateMovieCommandValidator : AbstractValidator<UpdateMovieCommand>
     {
-        public CreateMovieCommandValidator(IMovieRepository movieRepository)
+        public UpdateMovieCommandValidator(IMovieRepository movieRepository)
         {
             RuleFor(m => m.Title)
                 .NotEmpty()

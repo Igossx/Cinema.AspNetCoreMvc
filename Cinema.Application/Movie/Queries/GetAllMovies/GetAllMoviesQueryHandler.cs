@@ -18,6 +18,7 @@ namespace Cinema.Application.Movie.Queries.GetAllMovies
 
             var moviesDtos = movies.Select(m => new MovieDto()
             {
+                Id = m.Id,
                 Title = m.Title,
                 Description = m.Description,
                 ReleaseDate = m.ReleaseDate,

@@ -1,5 +1,8 @@
 ﻿using Cinema.Application.Movie.Commands.CreateMovie;
+using Cinema.Application.Movie.Commands.DeleteMovie;
+using Cinema.Application.Movie.Commands.UpdateMovie;
 using Cinema.Application.Movie.Queries.GetAllMovies;
+using Cinema.Application.Movie.Queries.GetMovieById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +18,7 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
             _mediator = mediator;
         }
 
-        // GET: MovieController
+        // GET: Movie
         public async Task<ActionResult> Index()
         {
             var movies = await _mediator.Send(new GetAllMoviesQuery());
@@ -23,19 +26,21 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
             return View(movies);
         }
 
-        // GET: MovieController/Details/5
-        public ActionResult Details(int id)
+        // GET: Movie/Details/5
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var movie = await _mediator.Send(new GetMovieByIdQuery() { Id = id });
+
+            return View(movie);
         }
 
-        // GET: MovieController/Create
+        // GET: Movie/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MovieController/Create
+        // POST: Movie/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateMovieCommand command)
@@ -45,51 +50,56 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
                 return View(command);
 
             }
+
             await _mediator.Send(command);
 
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: MovieController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Movie/Edit/5
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var movie = await _mediator.Send(new GetMovieByIdQuery() { Id = id });
+
+            var updateMovieCommand = new UpdateMovieCommand()
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                Description = movie.Description,
+                ReleaseDate = movie.ReleaseDate,
+                Duration = movie.Duration,
+                Category = movie.Category,
+                UpdatePosterImage = null,
+                ImagePath = movie.ImagePath
+            };
+
+            return View(updateMovieCommand);
         }
 
-        // POST: MovieController/Edit/5
+        // POST: Movie/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(UpdateMovieCommand command)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(command);
+
             }
-            catch
-            {
-                return View();
-            }
+
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: MovieController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: MovieController/Delete/5
+        // POST: Movie/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            await _mediator.Send(new DeleteMovieCommand() { Id = id });
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
