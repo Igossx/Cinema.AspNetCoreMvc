@@ -3,6 +3,7 @@ using Cinema.Application.Movie.Commands.DeleteMovie;
 using Cinema.Application.Movie.Commands.UpdateMovie;
 using Cinema.Application.Movie.Queries.GetAllMovies;
 using Cinema.Application.Movie.Queries.GetMovieById;
+using Cinema.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,10 +49,11 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 return View(command);
-
             }
 
             await _mediator.Send(command);
+
+            this.SetNotificaton("success", "Movie created.");
 
             return RedirectToAction(nameof(Index));
         }
@@ -84,10 +86,11 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 return View(command);
-
             }
 
             await _mediator.Send(command);
+
+            this.SetNotificaton("success", "Movie edited.");
 
             return RedirectToAction(nameof(Index));
         }
@@ -98,6 +101,8 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             await _mediator.Send(new DeleteMovieCommand() { Id = id });
+
+            this.SetNotificaton("success", "Movie deleted.");
 
             return RedirectToAction(nameof(Index));
         }

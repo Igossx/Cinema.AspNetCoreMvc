@@ -48,11 +48,11 @@
                             <a asp-controller="Movie" asp-route-Id="@obj.Id" asp-action="Details" class="btn btn-success mx-2">
                                 <i class="fas fa-list-ul"></i>
                             </a>
-                            <form method="post" asp-controller="Movie" asp-action="Delete" asp-route-Id="@obj.Id">
-                                <button type="submit" class="btn btn-danger mx-2" style="width: 100px;">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
+                            <button class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal-@obj.Id">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+
+                            <partial name="_DeleteModal" model="@obj" />
 
                         </div>
                     </td>
