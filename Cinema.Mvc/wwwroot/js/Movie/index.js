@@ -1,0 +1,37 @@
+﻿$(document).ready(function () {
+    $('#myTable').DataTable({
+        dom: 'Bfrtip',
+        lengthMenu: [10, 25, 50],
+        pageLength: 25,
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                text: 'Kopiuj',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                text: 'Excel',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                text: 'CSV',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'PDF',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            }
+        ]
+    });
+});
