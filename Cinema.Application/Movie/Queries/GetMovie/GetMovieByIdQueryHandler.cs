@@ -1,7 +1,7 @@
 ﻿using Cinema.Domain.Interfaces;
 using MediatR;
 
-namespace Cinema.Application.Movie.Queries.GetMovieById
+namespace Cinema.Application.Movie.Queries.GetMovie
 {
     public class GetMovieByIdQueryHandler : IRequestHandler<GetMovieByIdQuery, MovieDto>
     {

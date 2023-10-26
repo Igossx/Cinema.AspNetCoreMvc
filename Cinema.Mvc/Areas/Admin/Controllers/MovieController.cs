@@ -2,7 +2,7 @@
 using Cinema.Application.Movie.Commands.DeleteMovie;
 using Cinema.Application.Movie.Commands.UpdateMovie;
 using Cinema.Application.Movie.Queries.GetAllMovies;
-using Cinema.Application.Movie.Queries.GetMovieById;
+using Cinema.Application.Movie.Queries.GetMovie;
 using Cinema.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

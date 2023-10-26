@@ -27,7 +27,7 @@ namespace Cinema.Application.Movie.Commands.CreateMovie
                 .NotEmpty().WithMessage("Please enter release date");
 
             RuleFor(m => m.Category)
-             .NotEmpty().WithMessage("Please enter category");
+                .NotEmpty().WithMessage("Please enter category");
 
             RuleFor(m => m.Duration)
                 .NotEmpty().WithMessage("Please enter film duration")

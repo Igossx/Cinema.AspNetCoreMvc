@@ -21,18 +21,15 @@ namespace Cinema.Infrastructure.Repositories
             await _cinemaDbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(CinemaHall cinemaHall)
         {
-            var cinemaHall = await _cinemaDbContext.CinemaHalls.FindAsync(id) ??
-                throw new NotFoundException("CinemaHall not found.");
-
             _cinemaDbContext.CinemaHalls.Remove(cinemaHall);
             await _cinemaDbContext.SaveChangesAsync();
         }
 
         public async Task Update(CinemaHall cinemaHall)
         {
-            _cinemaDbContext.Update(cinemaHall);
+            _cinemaDbContext.CinemaHalls.Update(cinemaHall);
             await _cinemaDbContext.SaveChangesAsync();
         }
 
@@ -45,6 +42,11 @@ namespace Cinema.Infrastructure.Repositories
         {
             return await _cinemaDbContext.CinemaHalls.FindAsync(id) ??
                 throw new NotFoundException("CinemaHall not found.");
+        }
+
+        public async Task<CinemaHall?> GetByNameAsync(string name)
+        {
+            return await _cinemaDbContext.CinemaHalls.FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
         }
     }
 }

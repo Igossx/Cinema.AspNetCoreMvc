@@ -6,8 +6,9 @@ namespace Cinema.Domain.Interfaces
     {
         Task Create(CinemaHall cinemaHall);
         Task Update(CinemaHall cinemaHall);
-        Task Delete(int id);
+        Task Delete(CinemaHall cinemaHall);
         Task<CinemaHall> GetByIdAsync(int id);
         Task<IEnumerable<CinemaHall>> GetAllAsync();
+        Task<CinemaHall?> GetByNameAsync(string name);
     }
 }
