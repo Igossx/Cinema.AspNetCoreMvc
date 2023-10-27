@@ -21,7 +21,7 @@ namespace Cinema.Application.CinemaHall.Commands.CreateCinemaHall
 
             RuleFor(c => c.TotalSeats)
                 .NotEmpty().WithMessage("Please enter total seats")
-                .Must(seats => seats == 132 || seats == 72).WithMessage("The number of seats must be 132 or 72");
+                .Must(seats => seats == 132 || seats == 78).WithMessage("The number of seats must be 132 or 78");
         }
     }
 }

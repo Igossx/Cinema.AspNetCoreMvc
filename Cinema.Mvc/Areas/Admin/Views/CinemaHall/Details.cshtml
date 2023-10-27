@@ -1,0 +1,124 @@
+﻿@model CinemaHallDto
+
+@{
+    ViewData["Title"] = "CinemaHall Details";
+
+    char currentRowLetter = 'A';
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h2 class="text-primary display-4">Szczegóły sali kinowej</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <dl class="row">
+                <dt class="col-4">Id:</dt>
+                <dd class="col-8">@Model.Id</dd>
+
+                <dt class="col-4">Nazwa:</dt>
+                <dd class="col-8">@Model.Name</dd>
+
+                <dt class="col-4">Liczba miejsc:</dt>
+                <dd class="col-8">@Model.TotalSeats</dd>
+            </dl>
+        </div>
+        <div class="col-8">
+            <div class="cinemaHall">
+                <div class="screen">Ekran</div>
+                @if (Model.TotalSeats == 78)
+                {
+                    for (int row = 1; row < 7; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 9; seat++)
+                            {
+                                <div class="seat">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+
+                    for (int row = 9; row < 12; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 11; seat++)
+                            {
+                                <div class="seat">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+                }
+                else if (Model.TotalSeats == 132)
+                {
+                    @for (int row = 1; row < 8; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 13; seat++)
+                            {
+                                <div class="seat">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+
+                    @for (int row = 8; row < 11; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 17; seat++)
+                            {
+                                <div class="seat">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <a asp-controller="CinemaHall" asp-action="Edit" asp-route-Id="@Model.Id" class="btn btn-warning mt-2">
+                <i class="fas fa-edit"></i> Edytuj
+            </a>
+            <a asp-action="Index" class="btn btn-primary mt-2"><i class="fas fa-sign-out-alt"></i> Wróć</a>
+        </div>
+    </div>
+</div>

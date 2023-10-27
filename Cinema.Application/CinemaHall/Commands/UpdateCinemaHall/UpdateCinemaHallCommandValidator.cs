@@ -1,7 +1,7 @@
 ﻿using Cinema.Domain.Interfaces;
 using FluentValidation;
 
-namespace Cinema.Application.CinemaHall.Commands.DeleteCinemaHall
+namespace Cinema.Application.CinemaHall.Commands.UpdateCinemaHall
 {
     public class UpdateCinemaHallCommandValidator : AbstractValidator<UpdateCinemaHallCommand>
     {

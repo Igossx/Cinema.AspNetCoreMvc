@@ -34,14 +34,14 @@
             {
                 <tr>
                     <td width="5%">@rowNumber</td>
-                    <td width="15%">@obj.Name</td>
-                    <td width="15%">@obj.TotalSeats</td>
+                    <td width="25%">@obj.Name</td>
+                    <td width="10%">@obj.TotalSeats</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Movie" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-warning mx-2">
+                            <a asp-controller="CinemaHall" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-warning mx-2">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a asp-controller="Movie" asp-route-Id="@obj.Id" asp-action="Details" class="btn btn-success mx-2">
+                            <a asp-controller="CinemaHall" asp-route-Id="@obj.Id" asp-action="Details" class="btn btn-success mx-2">
                                 <i class="fas fa-list-ul"></i>
                             </a>
                             <button class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal-@obj.Id">

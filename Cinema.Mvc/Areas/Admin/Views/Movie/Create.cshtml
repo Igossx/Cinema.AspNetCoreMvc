@@ -11,7 +11,7 @@
 
         <div class="form-group row mb-3">
             <div class="col-4">
-                <label asp-for="Title" class="col-form-label"></label>
+                <label asp-for="Title" class="col-form-label">Tytuł</label>
             </div>
             <div class="col-8">
                 <input asp-for="Title" class="form-control" />
@@ -21,7 +21,7 @@
 
         <div class="form-group row mb-3">
             <div class="col-4">
-                <label asp-for="Description" class="col-form-label"></label>
+                <label asp-for="Description" class="col-form-label">Opis</label>
             </div>
             <div class="col-8">
                 <textarea asp-for="Description" class="form-control"></textarea>
@@ -31,7 +31,7 @@
 
         <div class="form-group row mb-3">
             <div class="col-4">
-                <label asp-for="ReleaseDate" class="col-form-label"></label>
+                <label asp-for="ReleaseDate" class="col-form-label">Data wydania</label>
             </div>
             <div class="col-8">
                 <input asp-for="ReleaseDate" type="date" class="form-control" max="@DateTime.Now.ToString("yyyy-MM-dd")">
@@ -41,7 +41,7 @@
 
         <div class="form-group row mb-3">
             <div class="col-4">
-                <label asp-for="Duration" class="col-form-label"></label>
+                <label asp-for="Duration" class="col-form-label">Czas trwania</label>
             </div>
             <div class="col-8">
                 <div class="input-group">
@@ -56,7 +56,7 @@
 
         <div class="form-group row mb-3">
             <div class="col-4">
-                <label asp-for="PosterImage" class="col-form-label"></label>
+                <label asp-for="PosterImage" class="col-form-label">Zdjęcie</label>
             </div>
             <div class="col-8">
                 <div class="custom-file">
@@ -69,7 +69,7 @@
 
         <div class="form-group row mb-3">
             <div class="col-4">
-                <label asp-for="Category" class="col-form-label"></label>
+                <label asp-for="Category" class="col-form-label">Kategoria</label>
             </div>
             <div class="col-8">
                 <select asp-for="Category" asp-items="@(new SelectList(Enum.GetValues(typeof(FilmCategory)).Cast<FilmCategory>()

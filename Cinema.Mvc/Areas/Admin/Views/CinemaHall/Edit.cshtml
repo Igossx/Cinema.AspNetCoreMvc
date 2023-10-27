@@ -1,13 +1,9 @@
-﻿@model CreateCinemaHallCommand
+﻿@model UpdateCinemaHallCommand
 
-@{
-    ViewData["Title"] = "Create Cinema Hall";
-}
-
-<form method="post" asp-action="Create" enctype="multipart/form-data">
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
     <div class="border p-3">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <h2 class="text-info pl-3">Dodaj salę kinową</h2>
+        <h2 class="text-info pl-3">Edytuj sale kinową</h2>
 
         <div class="form-group row mb-3">
             <div class="col-4">
@@ -24,17 +20,17 @@
                 <label asp-for="TotalSeats" class="col-form-label">Liczba miejsc</label>
             </div>
             <div class="col-8">
-                <select asp-for="TotalSeats" asp-items="@(new SelectList(new List<int> { 78, 132 }))" class="form-control">
-                    <option value="">Wybierz liczbę miejsc</option>
-                </select>
+                <div class="input-group">
+                    <input asp-for="TotalSeats" type="text" class="form-control" readonly>
+                </div>
                 <span asp-validation-for="TotalSeats" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row mt-3">
             <div class="col-8 offset-4 row">
                 <div class="col">
-                    <button type="submit" class="btn btn-success w-100"><i class="fas fa-plus"></i> Dodaj</button>
+                    <button type="submit" class="btn btn-success w-100"><i class="fas fa-plus"></i> Zapisz</button>
                 </div>
                 <div class="col">
                     <a asp-action="Index" class="btn btn-primary w-100"><i class="fas fa-sign-out-alt"></i> Wróć</a>

@@ -1,5 +1,6 @@
 ﻿using Cinema.Application.CinemaHall.Commands.CreateCinemaHall;
 using Cinema.Application.CinemaHall.Commands.DeleteCinemaHall;
+using Cinema.Application.CinemaHall.Commands.UpdateCinemaHall;
 using Cinema.Application.CinemaHall.Queries.GetAllCinemaHalls;
 using Cinema.Application.CinemaHall.Queries.GetCinemaHall;
 using Cinema.Mvc.Extensions;
@@ -65,7 +66,8 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
             var updateCinemaHallCommand = new UpdateCinemaHallCommand()
             {
                 Id = cinemaHall.Id,
-                Name = cinemaHall.Name
+                Name = cinemaHall.Name,
+                TotalSeats = cinemaHall.TotalSeats
             };
 
             return View(updateCinemaHallCommand);

@@ -1,7 +1,7 @@
 ﻿using Cinema.Domain.Interfaces;
 using MediatR;
 
-namespace Cinema.Application.CinemaHall.Commands.DeleteCinemaHall
+namespace Cinema.Application.CinemaHall.Commands.UpdateCinemaHall
 {
     public class UpdateCinemaHallCommandHandler : IRequestHandler<UpdateCinemaHallCommand>
     {
