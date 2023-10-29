@@ -1,4 +1,6 @@
-﻿namespace Cinema.Domain.Entities
+﻿using Cinema.Domain.Options;
+
+namespace Cinema.Domain.Entities
 {
     public class Screening
     {
@@ -9,11 +11,13 @@
 
         public DateTime DateTime { get; set; }
 
+        public DateTime Date => DateTime.Date;
+        public TimeSpan Time => DateTime.TimeOfDay;
+
         public int CinemaHallId { get; set; }
         public CinemaHall CinemaHall { get; set; } = default!;
 
-        public int RegularTicketPrice { get; set; } = 25;
-        public int ReducedTicketPrice { get; set; } = 15;
+        public PricingOptions Pricing { get; set; } = new PricingOptions();
 
         public List<Seat> Seats { get; set; } = new List<Seat>();
     }

@@ -21,11 +21,8 @@ namespace Cinema.Infrastructure.Repositories
             await _cinemaDbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Screening screening)
         {
-            var screening = await _cinemaDbContext.Screenings.FindAsync(id) ??
-                throw new NotFoundException("Screening not found.");
-
             _cinemaDbContext.Screenings.Remove(screening);
             await _cinemaDbContext.SaveChangesAsync();
         }

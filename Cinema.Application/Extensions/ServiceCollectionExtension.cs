@@ -1,4 +1,6 @@
-﻿using Cinema.Application.Movie.Commands.CreateMovie;
+﻿using Cinema.Application.Interfaces;
+using Cinema.Application.Movie.Commands.CreateMovie;
+using Cinema.Application.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -15,6 +17,10 @@ namespace Cinema.Application.Extensions
             services.AddValidatorsFromAssemblyContaining<CreateMovieCommandValidator>()
                    .AddFluentValidationAutoValidation()
                    .AddFluentValidationClientsideAdapters();
+
+            services.AddScoped<ICinemaHallService, CinemaHallService>();
+
+            services.AddScoped<IMovieService, MovieService>();
         }
     }
 }

@@ -26,6 +26,9 @@ namespace Cinema.Infrastructure.Persistence
             modelBuilder.Entity<Reservation>()
                 .Property(r => r.TotalCost)
                 .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Screening>()
+                .Ignore(m => m.Pricing);
         }
     }
 }

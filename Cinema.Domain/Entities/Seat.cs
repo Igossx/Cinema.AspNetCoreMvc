@@ -7,7 +7,7 @@
         public int ScreeningId { get; set; }
         public Screening Screening { get; set; } = default!;
 
-        public string RowSign { get; set; } = default!;
+        public char RowSign { get; set; } = default!;
         public int SeatNumber { get; set; }
         public bool IsReserved { get; set; } = false;
 

@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Cinema.Domain\Cinema.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Screening\Commands\UpdateScreening\" />
+    <Folder Include="Screening\Queries\GetScreening\" />
+  </ItemGroup>
+
 </Project>
