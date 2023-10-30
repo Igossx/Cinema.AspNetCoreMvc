@@ -1,13 +1,13 @@
-﻿@model CreateScreeningCommand
+﻿@model UpdateScreeningCommand
 
 @{
-    ViewData["Title"] = "Create Screening";
+    ViewData["Title"] = "Edit Screening";
 }
 
-<form method="post" asp-action="Create" enctype="multipart/form-data">
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
     <div class="border p-3">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <h2 class="text-info pl-3">Dodaj projekcję</h2>
+        <h2 class="text-info pl-3">Edytuj projekcję</h2>
 
         <div class="form-group row mb-3">
             <div class="col-4">
@@ -26,15 +26,13 @@
                 <label asp-for="CinemaHallId" class="col-form-label">Sala kinowa</label>
             </div>
             <div class="col-8">
-                <select asp-for="CinemaHallId" asp-items="@Model.CinemaHalls" class="form-control">
-                    <option value="">Wybierz salę kinową</option>
-                </select>
+                <input asp-for="CinemaHallName" class="form-control" readonly="readonly" />
                 <span asp-validation-for="CinemaHallId" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group row mb-3">
-            <label asp-for="DateTime" class="col-sm-4 col-form-label">Data i godzina projekcji</label>
+            <label asp-for="DateTime" class="col-sm-4 col-form-label">Wybierz datę i godzinę projekcji</label>
             <div class="col-sm-8">
                 <input asp-for="DateTime" class="form-control" type="datetime-local" />
                 <span asp-validation-for="DateTime" class="text-danger"></span>

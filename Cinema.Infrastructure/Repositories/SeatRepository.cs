@@ -21,11 +21,8 @@ namespace Cinema.Infrastructure.Repositories
             await _cinemaDbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Seat seat)
         {
-            var seat = await _cinemaDbContext.Seats.FindAsync(id) ??
-                throw new NotFoundException("Seat not found.");
-
             _cinemaDbContext.Seats.Remove(seat);
             await _cinemaDbContext.SaveChangesAsync();
         }

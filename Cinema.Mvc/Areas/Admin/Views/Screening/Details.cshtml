@@ -1,0 +1,146 @@
+﻿@model ScreeningDetailsDto
+
+@{
+    ViewData["Title"] = "Screening Details";
+
+    char currentRowLetter = 'A';
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h2 class="text-primary display-4">Szczegóły projekcji</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row ms-2">
+        <div class="col-4">
+            <dl class="row">
+                <dt class="col-4">Id projekcji:</dt>
+                <dd class="col-8">@Model.Id</dd>
+
+                <dt class="col-4">Id filmu:</dt>
+                <dd class="col-8">@Model.MovieId</dd>
+
+                <dt class="col-4">Nazwa filmu:</dt>
+                <dd class="col-8">@Model.MovieTitle</dd>
+
+                <dt class="col-4">Id sali:</dt>
+                <dd class="col-8">@Model.CinemaHallId</dd>
+
+                <dt class="col-4">Nazwa sali:</dt>
+                <dd class="col-8">@Model.CinemaHallName</dd>
+
+                <dt class="col-4">Data:</dt>
+                <dd class="col-8">@Model.ScreeningDate.ToString("dd.MM.yyyy")</dd>
+
+                <dt class="col-4">Godzina:</dt>
+                <dd class="col-8">@Model.ScreeningTime.ToString("hh\\:mm")</dd>
+
+                <dt class="col-4">Zajęte miejsca:</dt>
+                <dd class="col-8">@Model.OccupiedSeats</dd>
+
+                <dt class="col-4">Wolne miejsca:</dt>
+                <dd class="col-8">@Model.FreeSeats</dd>
+            </dl>
+        </div>
+        <div class="col-8">
+            <div class="cinemaHall">
+                <div class="screen">Ekran</div>
+                @if (Model.TotalSeats == 78)
+                {
+                    for (int row = 1; row < 7; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 9; seat++)
+                            {
+                                var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                <div class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+
+                    for (int row = 7; row < 10; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 11; seat++)
+                            {
+                                var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                <div class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+                }
+                else if (Model.TotalSeats == 132)
+                {
+                    @for (int row = 1; row < 8; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 13; seat++)
+                            {
+                                var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                <div class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+
+                    @for (int row = 8; row < 11; row++)
+                    {
+                        <div class="row">
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                            @for (int seat = 1; seat < 17; seat++)
+                            {
+                                var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                <div class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">@seat</div>
+                            }
+                            <div class="row-info">
+                                @currentRowLetter
+                            </div>
+                        </div>
+
+                        currentRowLetter++;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <a asp-controller="Screening" asp-action="Edit" asp-route-Id="@Model.Id" class="btn btn-warning mt-2">
+                <i class="fas fa-edit"></i> Edytuj
+            </a>
+            <a asp-action="Index" class="btn btn-primary mt-2"><i class="fas fa-sign-out-alt"></i> Wróć</a>
+        </div>
+    </div>
+</div>

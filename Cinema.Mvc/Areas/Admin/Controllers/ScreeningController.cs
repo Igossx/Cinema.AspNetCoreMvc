@@ -1,13 +1,12 @@
 ﻿using Cinema.Application.Interfaces;
 using Cinema.Application.Screening.Commands.CreateScreening;
 using Cinema.Application.Screening.Commands.DeleteScreening;
+using Cinema.Application.Screening.Commands.UpdateScreening;
 using Cinema.Application.Screening.Queries.GetAllScreenings;
-using Cinema.Domain.Entities;
-using Cinema.Domain.Interfaces;
+using Cinema.Application.Screening.Queries.GetScreening;
 using Cinema.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cinema.Mvc.Areas.Admin.Controllers
 {
@@ -74,6 +73,49 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
             this.SetNotificaton("success", "Screening deleted.");
 
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Screening/Edit/5
+        public async Task<ActionResult> Edit(int id)
+        {
+            var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = id });
+
+            var updateScreeningCommand = new UpdateScreeningCommand()
+            {
+                Id = screening.Id,
+                Movies = await _movieService.GetMoviesSelectListAsync(),
+                MovieId = screening.MovieId,
+                CinemaHallId = screening.CinemaHallId,
+                CinemaHallName = screening.CinemaHallName,
+                DateTime = screening.ScreeningDateTime,
+            };
+
+            return View(updateScreeningCommand);
+        }
+
+        // POST: Screening/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(UpdateScreeningCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotificaton("success", "Screening edited.");
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Screening/Details/5
+        public async Task<ActionResult> Details(int id)
+        {
+            var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = id });
+
+            return View(screening);
         }
     }
 }
