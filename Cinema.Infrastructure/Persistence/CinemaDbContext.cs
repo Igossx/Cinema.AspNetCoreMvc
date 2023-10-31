@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Infrastructure.Persistence
 {
-    public class CinemaDbContext : IdentityDbContext
+    public class CinemaDbContext : IdentityDbContext<ApplicationUser>
     {
         public CinemaDbContext(DbContextOptions<CinemaDbContext> options)
             : base(options) { }

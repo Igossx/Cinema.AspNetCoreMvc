@@ -26,6 +26,7 @@ namespace Cinema.Infrastructure.Extensions
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IScreeningRepository, ScreeningRepository>();
             services.AddScoped<ISeatRepository, SeatRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
         }
     }
 }
