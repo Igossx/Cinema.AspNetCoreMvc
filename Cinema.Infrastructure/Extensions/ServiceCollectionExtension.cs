@@ -20,7 +20,6 @@ namespace Cinema.Infrastructure.Extensions
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CinemaDbContext>();
 
-            services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ICinemaHallRepository, CinemaHallRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();

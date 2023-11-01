@@ -11,7 +11,7 @@
         public int SeatNumber { get; set; }
         public bool IsReserved { get; set; } = false;
 
-        public int? ReservationId { get; set; }
+        public Guid? ReservationId { get; set; }
         public Reservation Reservation { get; set; } = default!;
     }
 }

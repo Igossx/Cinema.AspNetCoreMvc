@@ -88,6 +88,8 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
                 CinemaHallId = screening.CinemaHallId,
                 CinemaHallName = screening.CinemaHallName,
                 DateTime = screening.ScreeningDateTime,
+                RegularTicketPrice = screening.RegularTicketPrice,
+                ReducedTicketPrice = screening.ReducedTicketPrice
             };
 
             return View(updateScreeningCommand);

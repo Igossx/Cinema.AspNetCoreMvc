@@ -30,7 +30,6 @@ namespace Cinema.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -54,19 +53,6 @@ namespace Cinema.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CinemaHalls",
                 columns: table => new
                 {
@@ -87,6 +73,7 @@ namespace Cinema.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EncodedTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
@@ -213,8 +200,8 @@ namespace Cinema.Infrastructure.Migrations
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CinemaHallId = table.Column<int>(type: "int", nullable: false),
-                    RegularTicketPrice = table.Column<int>(type: "int", nullable: false),
-                    ReducedTicketPrice = table.Column<int>(type: "int", nullable: false)
+                    RegularTicketPrice = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    ReducedTicketPrice = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -237,14 +224,12 @@ namespace Cinema.Infrastructure.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ScreeningId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ReservationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalCost = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: true)
+                    IsConfirmed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -255,11 +240,6 @@ namespace Cinema.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reservations_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Reservations_Screenings_ScreeningId",
                         column: x => x.ScreeningId,
@@ -275,10 +255,10 @@ namespace Cinema.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ScreeningId = table.Column<int>(type: "int", nullable: false),
-                    RowSign = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RowSign = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     SeatNumber = table.Column<int>(type: "int", nullable: false),
                     IsReserved = table.Column<bool>(type: "bit", nullable: false),
-                    ReservationId = table.Column<int>(type: "int", nullable: true)
+                    ReservationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -334,11 +314,6 @@ namespace Cinema.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservations_CartId",
-                table: "Reservations",
-                column: "CartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_ScreeningId",
@@ -400,9 +375,6 @@ namespace Cinema.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Screenings");

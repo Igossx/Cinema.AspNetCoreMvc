@@ -44,6 +44,15 @@
 
                 <dt class="col-4">Wolne miejsca:</dt>
                 <dd class="col-8">@Model.FreeSeats</dd>
+
+                <dt class="col-4">Cena normalna:</dt>
+                <dd class="col-8">@Model.RegularTicketPrice zł.</dd>
+
+                <dt class="col-4">Cena ulgowa:</dt>
+                <dd class="col-8">@Model.ReducedTicketPrice zł.</dd>
+
+                <dt class="col-4">Godzina zakończenia:</dt>
+                <dd class="col-8">@Model.ScreeningEndTime.ToString("hh\\:mm")</dd>
             </dl>
         </div>
         <div class="col-8">

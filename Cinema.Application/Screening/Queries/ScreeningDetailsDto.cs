@@ -16,6 +16,8 @@ namespace Cinema.Application.Screening.Queries
         public int FreeSeats { get; set; }
         public int OccupiedSeats { get; set; }
         public int TotalSeats { get; set; }
-
+        public decimal RegularTicketPrice { get; set; }
+        public decimal ReducedTicketPrice { get; set; }
+        public TimeSpan ScreeningEndTime { get; set; }
     }
 }

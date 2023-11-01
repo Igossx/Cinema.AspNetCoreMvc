@@ -54,7 +54,10 @@ namespace Cinema.Application.Screening.Queries.GetScreening
                 Seats = seatsDto,
                 FreeSeats = freeSeats,
                 OccupiedSeats = occupiedSeats,
-                TotalSeats = totalSeats
+                TotalSeats = totalSeats,
+                RegularTicketPrice = screening.RegularTicketPrice,
+                ReducedTicketPrice = screening.ReducedTicketPrice,
+                ScreeningEndTime = screening.EndDateTime.TimeOfDay
             };
 
             return screeningDto;

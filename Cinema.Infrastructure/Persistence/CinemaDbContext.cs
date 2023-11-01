@@ -14,7 +14,6 @@ namespace Cinema.Infrastructure.Persistence
         public DbSet<CinemaHall> CinemaHalls { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,7 +27,12 @@ namespace Cinema.Infrastructure.Persistence
                 .HasPrecision(10, 2);
 
             modelBuilder.Entity<Screening>()
-                .Ignore(m => m.Pricing);
+                .Property(r => r.RegularTicketPrice)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Screening>()
+                .Property(r => r.ReducedTicketPrice)
+                .HasPrecision(10, 2);
         }
     }
 }

@@ -8,13 +8,15 @@ namespace Cinema.Application.Screening.Commands.CreateScreening
         private readonly IScreeningRepository _screeningRepository;
         private readonly ICinemaHallRepository _cinemaHallRepository;
         private readonly ISeatRepository _seatRepository;
+        private readonly IMovieRepository _movieRepository;
 
         public CreateScreeningCommandHandler(IScreeningRepository screeningRepository,
-            ICinemaHallRepository cinemaHallRepository, ISeatRepository seatRepository)
+            ICinemaHallRepository cinemaHallRepository, ISeatRepository seatRepository, IMovieRepository movieRepository)
         {
             _screeningRepository = screeningRepository;
             _cinemaHallRepository = cinemaHallRepository;
             _seatRepository = seatRepository;
+            _movieRepository = movieRepository;
         }
 
         public async Task<Unit> Handle(CreateScreeningCommand request, CancellationToken cancellationToken)
@@ -25,6 +27,10 @@ namespace Cinema.Application.Screening.Commands.CreateScreening
                 CinemaHallId = request.CinemaHallId,
                 DateTime = request.DateTime
             };
+
+            var movie = await _movieRepository.GetByIdAsync(request.MovieId);
+
+            screening.EndDateTime = request.DateTime.AddMinutes(movie.Duration);
 
             await _screeningRepository.Create(screening);
 
