@@ -1,5 +1,6 @@
 using Cinema.Application.Extensions;
 using Cinema.Infrastructure.Extensions;
+using Cinema.Infrastructure.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,13 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+
+// Seed data
+var seeder = scope.ServiceProvider.GetRequiredService<CinemaSeeder>();
+
+await seeder.SeedAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

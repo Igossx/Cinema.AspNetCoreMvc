@@ -44,7 +44,7 @@
                 <label asp-for="RegularTicketPrice" class="col-form-label">Cena biletu normalnego</label>
             </div>
             <div class="col-8">
-                <input asp-for="RegularTicketPrice" class="form-control" type="number" step="0.5" min="1" />
+                <input asp-for="RegularTicketPrice" class="form-control" type="number" min="1" />
                 <span asp-validation-for="RegularTicketPrice" class="text-danger"></span>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <label asp-for="ReducedTicketPrice" class="col-form-label">Cena biletu ulgowego</label>
             </div>
             <div class="col-8">
-                <input asp-for="ReducedTicketPrice" class="form-control" type="number" step="0.5" min="1" />
+                <input asp-for="ReducedTicketPrice" class="form-control" type="number" min="1" />
                 <span asp-validation-for="ReducedTicketPrice" class="text-danger"></span>
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group row">
             <div class="col-8 offset-4 row">
                 <div class="col">
-                    <button type="submit" class="btn btn-success w-100"><i class="fas fa-plus"></i> Dodaj</button>
+                    <button type="submit" class="btn btn-success w-100"><i class="fas fa-plus"></i> Zapisz</button>
                 </div>
                 <div class="col">
                     <a asp-action="Index" class="btn btn-primary w-100"><i class="fas fa-sign-out-alt"></i> Wróć</a>

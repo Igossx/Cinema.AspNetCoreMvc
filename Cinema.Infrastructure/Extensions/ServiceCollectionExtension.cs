@@ -2,6 +2,7 @@
 using Cinema.Domain.Interfaces;
 using Cinema.Infrastructure.Persistence;
 using Cinema.Infrastructure.Repositories;
+using Cinema.Infrastructure.Seeder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,8 @@ namespace Cinema.Infrastructure.Extensions
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CinemaDbContext>();
+
+            services.AddScoped<CinemaSeeder>();
 
             services.AddScoped<ICinemaHallRepository, CinemaHallRepository>();
             services.AddScoped<IMovieRepository, MovieRepository>();

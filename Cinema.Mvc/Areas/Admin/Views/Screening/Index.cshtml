@@ -37,9 +37,9 @@
                 <tr>
                     <td width="5%">@rowNumber</td>
                     <td width="15%">@obj.MovieTitle</td>
-                    <td width="10%">@obj.CinemaHallName</td>
-                    <td width="15%">@obj.ScreeningDate.ToString("dd.MM.yyyy")</td>
-                    <td width="15%">@obj.ScreeningTime.ToString("hh\\:mm")</td>
+                    <td width="15%">@obj.CinemaHallName</td>
+                    <td width="12%">@obj.ScreeningDate.ToString("dd.MM.yyyy")</td>
+                    <td width="12%">@obj.ScreeningTime.ToString("hh\\:mm")</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
                             <a asp-controller="Screening" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-warning mx-2">
