@@ -19,8 +19,8 @@ namespace Cinema.Application.Extensions
                    .AddFluentValidationClientsideAdapters();
 
             services.AddScoped<ICinemaHallService, CinemaHallService>();
-
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
     }
 }

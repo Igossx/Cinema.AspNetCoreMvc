@@ -32,8 +32,6 @@ namespace Cinema.Infrastructure.Seeder
                 await CreateRoles();
 
                 await CreateUserAdmin();
-
-                await _cinemaDbContext.SaveChangesAsync();
             }
         }
 
@@ -60,6 +58,7 @@ namespace Cinema.Infrastructure.Seeder
                     LastName = "Kowalski",
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",
+                    EmailConfirmed = true
                 };
 
                 var password = "$Admin1230$";

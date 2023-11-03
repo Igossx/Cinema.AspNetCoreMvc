@@ -5,6 +5,7 @@ using Cinema.Application.Movie.Queries.GetAllMovies;
 using Cinema.Application.Movie.Queries.GetMovie;
 using Cinema.Mvc.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Mvc.Areas.Admin.Controllers

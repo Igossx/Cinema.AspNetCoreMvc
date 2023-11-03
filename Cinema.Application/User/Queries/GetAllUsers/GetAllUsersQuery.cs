@@ -1,5 +1,4 @@
-﻿using Cinema.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace Cinema.Application.User.Queries.GetAllUsers
 {

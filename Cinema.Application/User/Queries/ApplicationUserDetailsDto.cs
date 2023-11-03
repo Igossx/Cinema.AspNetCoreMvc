@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Cinema.Application.User.Queries
 {
-    public class ApplicationUserDto
+    public class ApplicationUserDetailsDto
     {
         public string Id { get; set; } = default!;
 
@@ -16,5 +17,9 @@ namespace Cinema.Application.User.Queries
 
         [Display(Name = "Rola")]
         public string UserRole { get; set; } = default!;
+
+        [Display(Name = "Numer telefonu")]
+        [Phone]
+        public string? PhoneNumber { get; set; }
     }
 }

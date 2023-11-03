@@ -16,12 +16,13 @@
 @if (Model != null && Model.Any())
 {
     <table class="table table-bordered table-striped" style="width:100%" id="myTable">
-        <thead class="thead-dark">
+        <thead class="table-dark">
             <tr>
                 <th>Id</th>
                 <th>@Html.DisplayNameFor(x => x.FirstName)</th>
                 <th>@Html.DisplayNameFor(x => x.LastName)</th>
                 <th>@Html.DisplayNameFor(x => x.Email)</th>
+                <th>@Html.DisplayNameFor(x => x.UserRole)</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,16 +34,17 @@
                     <td width="15%">@obj.FirstName</td>
                     <td width="15%">@obj.LastName</td>
                     <td width="15%">@obj.Email</td>
+                    <td width="10%">@obj.UserRole</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Movie" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-warning mx-2">
-                                <i class="fas fa-edit"></i>
+                            <a asp-controller="ApplicationUser" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-warning mx-2">
+                                <i class="fas fa-edit"></i> Edytuj
                             </a>
-                            <a asp-controller="Movie" asp-route-Id="@obj.Id" asp-action="Details" class="btn btn-success mx-2">
-                                <i class="fas fa-list-ul"></i>
+                            <a asp-controller="ApplicationUser" asp-route-Id="@obj.Id" asp-action="Details" class="btn btn-success mx-2">
+                                <i class="fas fa-list-ul"></i> Szczegóły
                             </a>
                             <button class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal-@obj.Id">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="fas fa-trash-alt"></i> Usuń
                             </button>
 
                             <partial name="_DeleteModal" model="@obj" />
