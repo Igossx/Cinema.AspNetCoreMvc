@@ -10,7 +10,7 @@
     <div class="col-10">
         <section>
             <form id="account" method="post">
-                <h2>Witaj ponownie!</h2>
+                <h2>Zaloguj się</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
@@ -31,6 +31,25 @@
                 </div>
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Zaloguj</button>
+                </div>
+                <!-- Register buttons -->
+                <div class="text-center mt-3">
+                    <p>lub za pomocą:</p>
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-google"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-github"></i>
+                    </button>
                 </div>
             </form>
         </section>
