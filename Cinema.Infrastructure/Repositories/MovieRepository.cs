@@ -54,5 +54,16 @@ namespace Cinema.Infrastructure.Repositories
         {
             return await _cinemaDbContext.Movies.FirstOrDefaultAsync(m => m.Title.ToLower() == title.ToLower());
         }
+
+        public async Task<IEnumerable<Movie>> GetThreeRandomMoviesAsync()
+        {
+            return await _cinemaDbContext.Movies.OrderBy(x => Guid.NewGuid()).Take(3).ToListAsync();
+        }
+
+        public Movie GetById(int id)
+        {
+            return _cinemaDbContext.Movies.Find(id) ??
+                throw new NotFoundException("Movie not found.");
+        }
     }
 }

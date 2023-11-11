@@ -35,10 +35,16 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
         // GET: Screening/Create
         public async Task<ActionResult> Create()
         {
+            var movies = await _movieService.GetMoviesSelectListAsync();
+            var cinemaHalls = await _cinemaHallService.GetCinemaHallsSelectListAsync();
+
+            TempData["Movies"] = movies;
+            TempData["CinemaHalls"] = cinemaHalls;
+
             var command = new CreateScreeningCommand()
             {
-                Movies = await _movieService.GetMoviesSelectListAsync(),
-                CinemaHalls = await _cinemaHallService.GetCinemaHallsSelectListAsync(),
+                Movies = movies,
+                CinemaHalls = cinemaHalls,
             };
 
             command.DateTime = DateTime.Now.Date;

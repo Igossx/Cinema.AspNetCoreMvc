@@ -7,6 +7,5 @@ namespace Cinema.Application.Screening.Commands.CreateScreening
     {
         public SelectList? Movies { set; get; }
         public SelectList? CinemaHalls { set; get; }
-
     }
 }

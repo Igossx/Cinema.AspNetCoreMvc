@@ -10,5 +10,6 @@ namespace Cinema.Domain.Interfaces
         Task<Screening> GetByIdAsync(int id);
         Task<IEnumerable<Screening>> GetAllAsync();
         Task<IEnumerable<Screening>> GetScreeningsByMovieAsync(int movieId);
+        Task<Screening?> GetByDateTimeAndCinemaHallId(DateTime dateTime, DateTime endDateTime, int cinemaHallId);
     }
 }

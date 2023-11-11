@@ -1,13 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cinema.Application.Movie.Queries.GetThreeRandomMovies;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Mvc.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class MenuController : Controller
     {
-        public IActionResult Home()
+        private readonly IMediator _mediator;
+
+        public MenuController(IMediator mediator)
         {
-            return View();
+            _mediator = mediator;
+        }
+
+        public async Task<IActionResult> Home()
+        {
+            var movies = await _mediator.Send(new GetThreeRandomMoviesQuery());
+
+            return View(movies);
         }
 
         public IActionResult Contact()

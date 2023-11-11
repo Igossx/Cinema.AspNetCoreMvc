@@ -2,7 +2,7 @@
 {
     public enum FilmCategory
     {
-        Action,
+        Action = 1,
         Comedy,
         Drama,
         Horror,

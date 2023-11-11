@@ -50,5 +50,14 @@ namespace Cinema.Infrastructure.Repositories
             return await _cinemaDbContext.Screenings.FindAsync(id) ??
                 throw new NotFoundException("Screening not found.");
         }
+
+        public async Task<Screening?> GetByDateTimeAndCinemaHallId(DateTime startDateTime, DateTime endDateTime, int cinemaHallId)
+        {
+            return await _cinemaDbContext.Screenings.FirstOrDefaultAsync(s =>
+                s.CinemaHallId == cinemaHallId &&
+                (DateTime.Compare(startDateTime, s.DateTime) >= 0 && DateTime.Compare(startDateTime, s.EndDateTime) < 0) ||
+                (DateTime.Compare(endDateTime, s.DateTime) > 0 && DateTime.Compare(endDateTime, s.EndDateTime) <= 0) ||
+                (DateTime.Compare(startDateTime, s.DateTime) <= 0 && DateTime.Compare(endDateTime, s.EndDateTime) >= 0));
+        }
     }
 }
