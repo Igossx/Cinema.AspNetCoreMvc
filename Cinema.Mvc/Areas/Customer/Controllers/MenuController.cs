@@ -1,4 +1,5 @@
-﻿using Cinema.Application.Movie.Queries.GetThreeRandomMovies;
+﻿using Cinema.Application.Movie.Queries.GetAllMovies;
+using Cinema.Application.Movie.Queries.GetThreeRandomMovies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

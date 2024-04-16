@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cinema.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class MovieController : Controller
     {
         private readonly IMediator _mediator;

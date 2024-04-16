@@ -61,7 +61,7 @@ namespace Cinema.Infrastructure.Seeder
                     EmailConfirmed = true
                 };
 
-                var password = "$Admin1230$";
+                var password = "Admin1230#";
 
                 var userAdmin = await _userManager.CreateAsync(user, password);
 

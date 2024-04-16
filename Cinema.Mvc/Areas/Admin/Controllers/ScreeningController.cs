@@ -6,11 +6,13 @@ using Cinema.Application.Screening.Queries.GetAllScreenings;
 using Cinema.Application.Screening.Queries.GetScreening;
 using Cinema.Mvc.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ScreeningController : Controller
     {
         private readonly IMediator _mediator;
@@ -35,16 +37,10 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
         // GET: Screening/Create
         public async Task<ActionResult> Create()
         {
-            var movies = await _movieService.GetMoviesSelectListAsync();
-            var cinemaHalls = await _cinemaHallService.GetCinemaHallsSelectListAsync();
-
-            TempData["Movies"] = movies;
-            TempData["CinemaHalls"] = cinemaHalls;
-
             var command = new CreateScreeningCommand()
             {
-                Movies = movies,
-                CinemaHalls = cinemaHalls,
+                Movies = await _movieService.GetMoviesSelectListAsync(),
+                CinemaHalls = await _cinemaHallService.GetCinemaHallsSelectListAsync(),
             };
 
             command.DateTime = DateTime.Now.Date;

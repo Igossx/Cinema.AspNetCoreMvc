@@ -5,11 +5,13 @@ using Cinema.Application.CinemaHall.Queries.GetAllCinemaHalls;
 using Cinema.Application.CinemaHall.Queries.GetCinemaHall;
 using Cinema.Mvc.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CinemaHallController : Controller
     {
         private readonly IMediator _mediator;

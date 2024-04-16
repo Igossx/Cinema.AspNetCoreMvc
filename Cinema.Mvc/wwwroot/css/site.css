@@ -78,3 +78,13 @@ body {
     width: 3rem;
     font-size: 1.5rem;
 }
+
+.pagination .page-item.active .page-link {
+    background-color: #333;
+    border-color: black;
+    color: white;
+}
+
+.pagination .page-link {
+    color: black;
+}

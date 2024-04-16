@@ -1,0 +1,87 @@
+﻿@model X.PagedList.IPagedList<MovieDto>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Biblioteka filmów</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Wybierz proszę film, który masz zamiar obejrzeć </p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-2">
+    <div class="container px-2 px-lg-2 mt-4">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var movie in Model)
+                {
+                    <div class="col-4 mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge badge-warning text-white position-absolute" style="top: 0.6rem; right: 0.6rem; font-size: 15px">Wyprzedaż</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" width="450" height="300" src="@movie.ImagePath" alt="Card Image" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">@movie.Title</h5>
+                                    <!-- Product price-->
+                            @movie.Category
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <div class="text-center mr-3">
+                                            <a asp-action="Details" asp-controller="Movies" asp-route-id="@movie.Id" class="btn btn-outline-dark mt-auto">
+                                                Pokaż więcej
+                                            </a>
+                                        </div>
+                                        <div class="text-center">
+                                            <a asp-action="IsFavorite" asp-controller="Favorite" asp-route-id="@movie.Id" class="btn btn-warning mt-auto">
+                                                <i class="far fa-star"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <h2 class="pb-3">Nie znaleziono żadnych filmów</h2>
+            }
+        </div>
+    </div>
+</section>
+<!-- Dodajemy element paginacji na dole -->
+<div class="row justify-content-center mt-4">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                new PagedListRenderOptions { PageCountAndCurrentLocationFormat = "Strona {0}",
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+                ContainerDivClasses = new[] { "pagination" },
+                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false
+                })
+            </ul>
+        </nav>
+    </div>
+</div>

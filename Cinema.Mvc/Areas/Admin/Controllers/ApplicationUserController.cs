@@ -5,11 +5,13 @@ using Cinema.Application.User.Queries.GetAllUsers;
 using Cinema.Application.User.Queries.GetUser;
 using Cinema.Mvc.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ApplicationUserController : Controller
     {
         private readonly IMediator _mediator;

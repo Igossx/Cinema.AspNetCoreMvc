@@ -31,25 +31,34 @@
                 <div class=" collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto ">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Home">Home</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Home">O kinie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Movies" asp-action="Index">Aktualne filmy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Screenings" asp-action="Index">Kup bilet</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Faq">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Contact">Contact</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Contact">Kontakt</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mx-2 dropdown-toggle text-dark" href="#" id="movieDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Zarządzaj
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="movieDropdown">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Movie" asp-action="Index">Filmy</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="CinemaHall" asp-action="Index">Sale kinowe</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Screening" asp-action="Index">Projekcje</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="ApplicationUser" asp-action="Index">Użytkownicy</a>
-                            </div>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link mx-2 dropdown-toggle text-dark" href="#" id="movieDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Zarządzaj
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="movieDropdown">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Movie" asp-action="Index">Filmy</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CinemaHall" asp-action="Index">Sale kinowe</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Screening" asp-action="Index">Projekcje</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ApplicationUser" asp-action="Index">Użytkownicy</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
                         <partial name="_LoginPartial" />
