@@ -12,6 +12,7 @@ namespace Cinema.Domain.Interfaces
         Task<IEnumerable<Movie>> GetAllAsync();
         Task<Movie?> GetByTitleAsync(string title);
         Task<IEnumerable<Movie>> GetThreeRandomMoviesAsync();
+        Task<IEnumerable<Movie>> GetFourRandomMoviesAsync();
         Movie GetById(int id);
     }
 }

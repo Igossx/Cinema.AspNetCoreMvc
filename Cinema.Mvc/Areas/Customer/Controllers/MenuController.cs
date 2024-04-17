@@ -1,5 +1,4 @@
-﻿using Cinema.Application.Movie.Queries.GetAllMovies;
-using Cinema.Application.Movie.Queries.GetThreeRandomMovies;
+﻿using Cinema.Application.Movie.Queries.GetThreeRandomMovies;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +16,9 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
 
         public async Task<IActionResult> Home()
         {
-            var movies = await _mediator.Send(new GetThreeRandomMoviesQuery());
+            var randomMovies = await _mediator.Send(new GetThreeRandomMoviesQuery());
 
-            return View(movies);
+            return View(randomMovies);
         }
 
         public IActionResult Contact()

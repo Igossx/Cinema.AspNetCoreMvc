@@ -1,7 +1,7 @@
-﻿using Cinema.Application.CinemaHall.Queries.GetCinemaHall;
-using Cinema.Application.Movie.Queries;
-using Cinema.Application.Movie.Queries.GetAllMovies;
+﻿using Cinema.Application.Movie.Queries.GetAllMovies;
+using Cinema.Application.Movie.Queries.GetFourRandomMovies;
 using Cinema.Application.Movie.Queries.GetMovie;
+using Cinema.Mvc.Areas.Customer.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
@@ -36,7 +36,15 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         {
             var movie = await _mediator.Send(new GetMovieByIdQuery() { Id = id });
 
-            return View(movie);
+            var randomMovies = await _mediator.Send(new GetFourRandomMoviesQuery());
+
+            var viewModel = new MovieDetailsViewModel
+            {
+                Movie = movie,
+                RandomMovies = randomMovies
+            };
+
+            return View(viewModel);
         }
     }
 }
