@@ -1,6 +1,7 @@
 ﻿using Cinema.Application.Movie.Queries.GetAllMovies;
 using Cinema.Application.Movie.Queries.GetFourRandomMovies;
 using Cinema.Application.Movie.Queries.GetMovie;
+using Cinema.Domain.Enums;
 using Cinema.Mvc.Areas.Customer.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,21 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(int? page, string searchString, FilmCategory? filmCategory)
         {
             const int pageSize = 2;
 
             var allMovies = await _mediator.Send(new GetAllMoviesQuery());
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allMovies = allMovies.Where(m => m.Title.ToLower().Contains(searchString.ToLower()));
+            }
+
+            if (filmCategory.HasValue)
+            {
+                allMovies = allMovies.Where(m => m.Category == filmCategory);
+            }
 
             var pageNumber = page ?? 1;
             var paginatedMovies = allMovies.ToPagedList(pageNumber, pageSize);

@@ -1,4 +1,5 @@
-﻿@model X.PagedList.IPagedList<MovieDto>
+﻿@using Cinema.Domain.Enums
+@model X.PagedList.IPagedList<MovieDto>
 
 @{
     ViewData["Title"] = "Movies";
@@ -16,18 +17,29 @@
 <!-- Section-->
 <section class="py-2">
     <div class="container px-2 px-lg-2 mt-4">
-        <!-- Search form -->
-        <form method="get" action="@Url.Action("Index", "Movies")">
-            <div class="row mb-4">
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" name="searchByCategory" placeholder="Wyszukaj po kategorii" />
+        <form asp-controller="Movies" asp-action="Index" method="get" class="text-center">
+            <div class="row justify-content-center align-items-end mb-5">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" name="searchString" placeholder="Wyszukaj po tytule" class="form-control" />
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <input type="text" class="form-control" name="searchByName" placeholder="Wyszukaj po nazwie" />
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select id="filmCategory" name="filmCategory" class="form-control">
+                            <option value="">Wybierz kategorię</option>
+                            @foreach (var category in Enum.GetValues(typeof(FilmCategory)))
+                            {
+                                <option value="@category">@category</option>
+                            }
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="text-lg-end">
-                <button type="submit" class="btn btn-primary">Szukaj</button>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-primary w-100" data-mdb-ripple-init>
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
         </form>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
