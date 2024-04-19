@@ -29,7 +29,7 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
         // GET: Screening
         public async Task<IActionResult> Index()
         {
-            var screenings = await _mediator.Send(new GetAllScreeningQuery());
+            var screenings = await _mediator.Send(new GetAllScreeningsQuery());
 
             return View(screenings);
         }

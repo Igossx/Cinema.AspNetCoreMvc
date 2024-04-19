@@ -1,15 +1,15 @@
 ﻿using Cinema.Domain.Interfaces;
 using MediatR;
 
-namespace Cinema.Application.Screening.Queries.GetAllScreenings
+namespace Cinema.Application.Screening.Queries.GetAllScreeningsByMovie
 {
-    public class GetAllScreeningsQueryHandler : IRequestHandler<GetAllScreeningsQuery, IEnumerable<ScreeningDto>>
+    public class GetAllScreeningsByMovieQueryHandler : IRequestHandler<GetAllScreeningsByMovieQuery, IEnumerable<ScreeningDto>>
     {
         private readonly IScreeningRepository _screeningRepository;
         private readonly IMovieRepository _movieRepository;
         private readonly ICinemaHallRepository _cinemaHallRepository;
 
-        public GetAllScreeningsQueryHandler(IScreeningRepository screeningRepository,
+        public GetAllScreeningsByMovieQueryHandler(IScreeningRepository screeningRepository,
             IMovieRepository movieRepository, ICinemaHallRepository cinemaHallRepository)
         {
             _screeningRepository = screeningRepository;
@@ -17,9 +17,9 @@ namespace Cinema.Application.Screening.Queries.GetAllScreenings
             _cinemaHallRepository = cinemaHallRepository;
         }
 
-        public async Task<IEnumerable<ScreeningDto>> Handle(GetAllScreeningsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ScreeningDto>> Handle(GetAllScreeningsByMovieQuery request, CancellationToken cancellationToken)
         {
-            var screenings = await _screeningRepository.GetAllAsync();
+            var screenings = await _screeningRepository.GetScreeningsByMovieAsync(request.MovieId);
 
             var screeningDtos = screenings.Select(s => new ScreeningDto()
             {
@@ -31,6 +31,7 @@ namespace Cinema.Application.Screening.Queries.GetAllScreenings
             });
 
             return screeningDtos;
+
         }
     }
 }
