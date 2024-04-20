@@ -1,6 +1,10 @@
-﻿using Cinema.Application.Screening.Queries.GetAllScreenings;
+﻿using Cinema.Application.Reservation.Commands.CreateReservation;
+using Cinema.Application.Screening.Queries.GetAllScreenings;
 using Cinema.Application.Screening.Queries.GetAllScreeningsByMovie;
 using Cinema.Application.Screening.Queries.GetScreening;
+using Cinema.Domain.Entities;
+using Cinema.Domain.Enums;
+using Cinema.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
@@ -70,6 +74,37 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
             var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = id });
 
             return View(screening);
+        }
+
+        // GET: Screenings/DetailsByMovie/5
+        public async Task<IActionResult> DetailsByMovie(int id)
+        {
+            var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = id });
+
+            return View(screening);
+        }
+
+        // GET: Screenings/Details/5/Reserved
+        public async Task<IActionResult> Reserve(int screeningId)
+        {
+            var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = screeningId });
+
+            return View(screening);
+        }
+
+        // POST Screenings/Details/5/Reserved
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reserve(CreateReservationCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

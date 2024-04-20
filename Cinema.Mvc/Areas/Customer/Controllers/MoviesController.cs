@@ -39,6 +39,9 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
             var pageNumber = page ?? 1;
             var paginatedMovies = allMovies.ToPagedList(pageNumber, pageSize);
 
+            ViewBag.SearchString = searchString;
+            ViewBag.FilmCategory = filmCategory;
+
             return View(paginatedMovies);
         }
 

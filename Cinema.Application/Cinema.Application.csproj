@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Cinema.Domain\Cinema.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Reservation\Queries\" />
+  </ItemGroup>
+
 </Project>

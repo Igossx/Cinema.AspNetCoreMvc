@@ -4,6 +4,8 @@ namespace Cinema.Application.Seat
 {
     public class SeatDto
     {
+        public int Id { get; set; }
+
         [Display(Name = "Rząd")]
         public char RowSign { get; set; } = default!;
 

@@ -1,0 +1,198 @@
+﻿@model ScreeningDetailsDto
+
+@{
+    ViewData["Title"] = "Reserve";
+    char currentRowLetter = 'A';
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h1 class="text-primary">System rezerwacji miejsc</h1>
+        </div>
+    </div>
+</div>
+
+<!-- Formularz rezerwacji -->
+<form id="reservationForm" asp-action="Reserve" method="post">
+    <input type="hidden" name="ScreeningId" value="@Model.Id" />
+    <input type="hidden" id="selectedSeats" name="SelectedSeats" />
+    <input type="hidden" id="ticketType" name="TicketType" />
+
+    <div class="container">
+        <div class="row ms-2">
+            <div class="col-4">
+                <dl class="row">
+                    <dt class="col-6">
+                        <h5>Nazwa filmu:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.MovieTitle</dd>
+
+                    <dt class="col-6">
+                        <h5>Nazwa sali:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.CinemaHallName</dd>
+
+                    <dt class="col-6">
+                        <h5>Data:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.ScreeningDate.ToString("dd.MM.yyyy")</dd>
+
+                    <dt class="col-6">
+                        <h5>Godzina:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.ScreeningTime.ToString("hh\\:mm") - @Model.ScreeningEndTime.ToString("hh\\:mm")</dd>
+
+                    <dt class="col-6">
+                        <h5>Wolne miejsca:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.FreeSeats</dd>
+
+                    <dt class="col-6">
+                        <h5>Cena normalna:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.RegularTicketPrice PLN</dd>
+
+                    <dt class="col-6">
+                        <h5>Cena ulgowa:</h5>
+                    </dt>
+                    <dd class="col-6 lead">@Model.ReducedTicketPrice PLN</dd>
+
+                    <dt class="col-6 mt-5">
+                        <h5>Wolne miejsca:</h5>
+                    </dt>
+                    <dd class="col-6 mt-5"><div class="seat available"></div></dd>
+
+                    <dt class="col-6">
+                        <h5>Zajęte miejsca:</h5>
+                    </dt>
+                    <dd class="col-6"><div class="seat reserved"></div></dd>
+                </dl>
+            </div>
+            <div class="col-8">
+                <div class="cinemaHall">
+                    <div class="screen">Ekran</div>
+                    @if (Model.TotalSeats == 78)
+                    {
+                        for (int row = 1; row < 7; row++)
+                        {
+                            <div class="row">
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                                @for (int seat = 1; seat < 9; seat++)
+                                {
+                                    var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                }
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                            </div>
+
+                            currentRowLetter++;
+                        }
+
+                        for (int row = 7; row < 10; row++)
+                        {
+                            <div class="row">
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                                @for (int seat = 1; seat < 11; seat++)
+                                {
+                                    var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                }
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                            </div>
+
+                            currentRowLetter++;
+                        }
+                    }
+                    else if (Model.TotalSeats == 132)
+                    {
+                        @for (int row = 1; row < 8; row++)
+                        {
+                            <div class="row">
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                                @for (int seat = 1; seat < 13; seat++)
+                                {
+                                    var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                }
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                            </div>
+
+                            currentRowLetter++;
+                        }
+
+                        @for (int row = 8; row < 11; row++)
+                        {
+                            <div class="row">
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                                @for (int seat = 1; seat < 17; seat++)
+                                {
+                                    var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
+                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                }
+                                <div class="row-info">
+                                    @currentRowLetter
+                                </div>
+                            </div>
+
+                            currentRowLetter++;
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <h5>Typ biletu:</h5>
+        <select id="ticketType" class="form-select">
+            <option value="normalny">Normalny</option>
+            <option value="ulgowy">Ulgowy</option>
+        </select>
+    </div>
+
+    <!-- Przycisk do zatwierdzenia rezerwacji -->
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+    </div>
+</form>
+
+<script>
+    // Funkcja do aktualizacji danych przed wysłaniem formularza
+    function updateFormFields() {
+        var selectedSeats = Array.from(document.querySelectorAll(".selected")).map(seat => seat.innerText);
+        document.getElementById("selectedSeats").value = selectedSeats.join(",");
+        document.getElementById("ticketType").value = document.getElementById("ticketTypeSelect").value;
+    }
+
+    // Funkcja do przełączania zaznaczenia miejsc
+    function toggleSeatSelection(seat) {
+        seat.classList.toggle("selected");
+    }
+
+    // Nasłuchiwanie kliknięcia na miejsce
+    document.getElementById("cinemaHall").addEventListener("click", function (event) {
+        if (event.target && event.target.matches(".seat")) {
+            toggleSeatSelection(event.target);
+        }
+    });
+
+    // Nasłuchiwanie zdarzenia submit na formularzu
+    document.getElementById("reservationForm").addEventListener("submit", function () {
+        updateFormFields();
+    });
+</script>

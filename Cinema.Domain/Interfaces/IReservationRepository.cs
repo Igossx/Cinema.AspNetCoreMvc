@@ -9,5 +9,6 @@ namespace Cinema.Domain.Interfaces
         Task Delete(int id);
         Task<Reservation> GetByIdAsync(int id);
         Task<IEnumerable<Reservation>> GetAllAsync();
+        Task<IEnumerable<Seat>> GetSelectedSeatsAsync(IEnumerable<int> seatIds);
     }
 }

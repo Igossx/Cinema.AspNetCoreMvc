@@ -88,3 +88,19 @@ body {
 .pagination .page-link {
     color: black;
 }
+
+.movie-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+    .movie-card:hover {
+        transform: scale(1.08);
+    }
+
+.screening-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+    .screening-card:hover {
+        transform: scale(1.08);
+    }

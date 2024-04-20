@@ -88,14 +88,14 @@
         <div class="row gx-5">
             @foreach (var movie in Model)
             {
-                <div class="col-lg-4 mb-5">
+                <div class="col-lg-4 mb-5 movie-card">
                     <div class="card h-100 shadow border-0">
                         <img class="card-img-top" src="@movie.ImagePath" alt="..." />
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <div class="badge bg-primary bg-gradient rounded-pill mb-2">@movie.Category</div>
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">@movie.Title</h5>
+                                <h4 class="fw-bolder">@movie.Title</h4>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="small">
