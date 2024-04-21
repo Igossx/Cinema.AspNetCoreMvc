@@ -6,9 +6,9 @@ namespace Cinema.Application.User.Commands.UpdateUserRole
 {
     public class UpdateUserRoleCommandHandler : IRequestHandler<UpdateUserRoleCommand>
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<Domain.Entities.ApplicationUser> _userManager;
 
-        public UpdateUserRoleCommandHandler(UserManager<ApplicationUser> userManager)
+        public UpdateUserRoleCommandHandler(UserManager<Domain.Entities.ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

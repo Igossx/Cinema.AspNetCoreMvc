@@ -36,6 +36,7 @@ namespace Cinema.Application.Screening.Queries.GetScreening
 
             var seatsDto = seats.Select(s => new SeatDto()
             {
+                Id = s.Id,
                 RowSign = s.RowSign,
                 SeatNumber = s.SeatNumber,
                 IsReserved = s.IsReserved

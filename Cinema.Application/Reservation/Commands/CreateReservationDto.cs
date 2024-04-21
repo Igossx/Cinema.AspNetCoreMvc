@@ -6,7 +6,7 @@ namespace Cinema.Application.Reservation.Commands
     {
         public int ScreeningId { get; set; }
 
-        public string UserId { get; set; } = default!;
+        //public string UserId { get; set; } = default!;
 
         public DateTime ReservationTime { get; set; } = DateTime.UtcNow;
 
@@ -15,6 +15,6 @@ namespace Cinema.Application.Reservation.Commands
         public decimal TotalCost { get; set; } = 0;
         public bool IsConfirmed { get; set; } = false;
 
-        public TicketType TicketType { get; set; }
+        //public TicketType? TicketType { get; set; }
     }
 }

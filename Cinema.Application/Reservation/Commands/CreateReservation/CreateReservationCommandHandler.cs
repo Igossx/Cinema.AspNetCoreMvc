@@ -1,5 +1,4 @@
-﻿using Cinema.Domain.Enums;
-using Cinema.Domain.Interfaces;
+﻿using Cinema.Domain.Interfaces;
 using MediatR;
 
 namespace Cinema.Application.Reservation.Commands.CreateReservation
@@ -20,24 +19,22 @@ namespace Cinema.Application.Reservation.Commands.CreateReservation
 
         public async Task<Unit> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
-
-            var screening = await _screeningRepository.GetByIdAsync(request.ScreeningId);
-
             var selectedSeats = await _reservationRepository.GetSelectedSeatsAsync(request.SelectedSeats);
 
-            decimal totalCost = selectedSeats.Count() * (request.TicketType == TicketType.Normal ? screening.RegularTicketPrice : screening.ReducedTicketPrice);
+            await _seatRepository.ReserveSeat(selectedSeats);
+
+            //decimal totalCost = selectedSeats.Count() * (request.TicketType == TicketType.Normal ? screening.RegularTicketPrice : screening.ReducedTicketPrice);
 
             // Utworzenie nowego obiektu rezerwacji
             var reservation = new Domain.Entities.Reservation
             {
                 ScreeningId = request.ScreeningId,
-                UserId = "999", // Do zmiany - na razie jest ustawione na wartość domyślną
-                TicketType = request.TicketType,
-                ReservedSeats = selectedSeats.ToList(),
-                TotalCost = totalCost
+                TotalCost = 100
             };
 
             await _reservationRepository.Create(reservation);
+
+            await _seatRepository.AssignToReservation(selectedSeats, reservation.Id);
 
             return Unit.Value;
         }

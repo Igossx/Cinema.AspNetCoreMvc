@@ -17,7 +17,6 @@
 <form id="reservationForm" asp-action="Reserve" method="post">
     <input type="hidden" name="ScreeningId" value="@Model.Id" />
     <input type="hidden" id="selectedSeats" name="SelectedSeats" />
-    <input type="hidden" id="ticketType" name="TicketType" />
 
     <div class="container">
         <div class="row ms-2">
@@ -83,7 +82,17 @@
                                 @for (int seat = 1; seat < 9; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                    <label class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                        @if (currentSeat.IsReserved)
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" />
+                                        }
+                                        @currentSeat.SeatNumber
+                                    </label>
                                 }
                                 <div class="row-info">
                                     @currentRowLetter
@@ -102,7 +111,17 @@
                                 @for (int seat = 1; seat < 11; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                    <label class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                        @if (currentSeat.IsReserved)
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" />
+                                        }
+                                        @currentSeat.SeatNumber
+                                    </label>
                                 }
                                 <div class="row-info">
                                     @currentRowLetter
@@ -123,7 +142,18 @@
                                 @for (int seat = 1; seat < 13; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                    <div class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                        @if (currentSeat.IsReserved)
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" />
+                                        }
+                                        @currentSeat.SeatNumber
+                                    </div>
+
                                 }
                                 <div class="row-info">
                                     @currentRowLetter
@@ -142,7 +172,17 @@
                                 @for (int seat = 1; seat < 17; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <button class="seat @(currentSeat!.IsReserved ? "reserved" : "available")" onclick="toggleSeatSelection(this)">@seat</button>
+                                    <div class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                        @if (currentSeat.IsReserved)
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" />
+                                        }
+                                        @currentSeat.SeatNumber
+                                    </div>
                                 }
                                 <div class="row-info">
                                     @currentRowLetter
@@ -157,42 +197,50 @@
         </div>
     </div>
 
-    <div class="col-4">
-        <h5>Typ biletu:</h5>
-        <select id="ticketType" class="form-select">
-            <option value="normalny">Normalny</option>
-            <option value="ulgowy">Ulgowy</option>
-        </select>
-    </div>
-
     <!-- Przycisk do zatwierdzenia rezerwacji -->
     <div class="text-center mt-4">
-        <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+        <button id="reservationButton" type="submit" class="btn btn-primary">Zarezerwuj</button>
     </div>
 </form>
 
 <script>
-    // Funkcja do aktualizacji danych przed wysłaniem formularza
-    function updateFormFields() {
-        var selectedSeats = Array.from(document.querySelectorAll(".selected")).map(seat => seat.innerText);
-        document.getElementById("selectedSeats").value = selectedSeats.join(",");
-        document.getElementById("ticketType").value = document.getElementById("ticketTypeSelect").value;
-    }
+    // Dodaj obsługę kliknięcia dla paneli miejsc
+    document.querySelectorAll('.seat').forEach(seat => {
+        seat.addEventListener('click', function () {
+            // Sprawdź, czy miejsce jest zarezerwowane lub wybrane
+            if (!this.classList.contains('reserved')) {
+                // Toggle klasy 'selected' dla panelu
+                this.classList.toggle('selected');
+                // Znajdź zagnieżdżony checkbox i zmień jego stan
+                const checkbox = this.querySelector('.seat-checkbox');
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+        // Pobierz wszystkie miejsca
+        const seats = document.querySelectorAll('.seat');
 
-    // Funkcja do przełączania zaznaczenia miejsc
-    function toggleSeatSelection(seat) {
-        seat.classList.toggle("selected");
-    }
+        // Dodaj obsługę kliknięcia dla paneli miejsc
+        seats.forEach(seat => {
+            seat.addEventListener('click', function () {
+                if (!this.classList.contains('reserved')) {
+                    this.classList.toggle('selected');
+                    const checkbox = this.querySelector('.seat-checkbox');
+                    checkbox.checked = !checkbox.checked;
+                    updateSeatsAppearance(); // Aktualizuj wygląd wszystkich miejsc po kliknięciu
+                }
+            });
+        });
 
-    // Nasłuchiwanie kliknięcia na miejsce
-    document.getElementById("cinemaHall").addEventListener("click", function (event) {
-        if (event.target && event.target.matches(".seat")) {
-            toggleSeatSelection(event.target);
+        // Aktualizuj wygląd wszystkich miejsc na podstawie ich stanu zaznaczenia
+        function updateSeatsAppearance() {
+            seats.forEach(seat => {
+                const checkbox = seat.querySelector('.seat-checkbox');
+                if (checkbox.checked) {
+                    seat.classList.add('selected');
+                } else {
+                    seat.classList.remove('selected');
+                }
+            });
         }
-    });
-
-    // Nasłuchiwanie zdarzenia submit na formularzu
-    document.getElementById("reservationForm").addEventListener("submit", function () {
-        updateFormFields();
     });
 </script>

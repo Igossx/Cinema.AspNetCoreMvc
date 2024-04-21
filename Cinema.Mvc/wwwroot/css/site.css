@@ -36,6 +36,7 @@ body {
     margin: 2px;
     border-radius: 30%;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .screen {
@@ -61,13 +62,14 @@ body {
 }
 
 .available {
-    background-color: green;
+    background-color: #65db65;
     color: white;
 }
 
 .reserved {
-    background-color: red;
+    background-color: #f26352;
     color: white;
+    cursor: not-allowed;
 }
 
 .feature {
@@ -104,3 +106,12 @@ body {
     .screening-card:hover {
         transform: scale(1.08);
     }
+
+.selected {
+    background-color: grey;
+}
+
+.seat-checkbox {
+    position: absolute;
+    left: -9999px;
+}

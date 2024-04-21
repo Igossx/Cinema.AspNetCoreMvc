@@ -97,10 +97,14 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reserve(CreateReservationCommand command)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(command);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = command.ScreeningId });
+            //    return View("Reserve", screening);
+            //}
+
+            var selectedSeats = command.SelectedSeats;
+            var screeningsId = command.ScreeningId;
 
             await _mediator.Send(command);
 

@@ -3,7 +3,6 @@ using Cinema.Domain.Exceptions;
 using Cinema.Domain.Interfaces;
 using Cinema.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Cinema.Infrastructure.Repositories
 {
@@ -42,7 +41,7 @@ namespace Cinema.Infrastructure.Repositories
             return await _cinemaDbContext.Reservations.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Reservation> GetByIdAsync(int id)
+        public async Task<Reservation> GetByIdAsync(Guid id)
         {
             return await _cinemaDbContext.Reservations.FindAsync(id) ??
                 throw new NotFoundException("Reservation not found.");

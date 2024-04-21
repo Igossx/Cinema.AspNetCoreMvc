@@ -8,9 +8,9 @@ namespace Cinema.Application.User.Queries.GetUser
     public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, ApplicationUserDetailsDto>
     {
         private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<Domain.Entities.ApplicationUser> _userManager;
 
-        public GetUserByIdQueryHandler(IApplicationUserRepository applicationUserRepository, UserManager<ApplicationUser> userManager)
+        public GetUserByIdQueryHandler(IApplicationUserRepository applicationUserRepository, UserManager<Domain.Entities.ApplicationUser> userManager)
         {
             _applicationUserRepository = applicationUserRepository;
             _userManager = userManager;

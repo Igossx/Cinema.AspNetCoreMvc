@@ -50,5 +50,27 @@ namespace Cinema.Infrastructure.Repositories
             .Where(s => s.ScreeningId == screeningId)
             .AsNoTracking().ToListAsync();
         }
+
+        public async Task ReserveSeat(IEnumerable<Seat> seatsToReserve)
+        {
+            foreach (var seat in seatsToReserve)
+            {
+                seat.IsReserved = true;
+                _cinemaDbContext.Update(seat);
+            }
+
+            await _cinemaDbContext.SaveChangesAsync();
+        }
+
+        public async Task AssignToReservation(IEnumerable<Seat> seatsToAssign, Guid reservationId)
+        {
+            foreach (var seat in seatsToAssign)
+            {
+                seat.ReservationId = reservationId;
+                _cinemaDbContext.Update(seat);
+            }
+
+            await _cinemaDbContext.SaveChangesAsync();
+        }
     }
 }

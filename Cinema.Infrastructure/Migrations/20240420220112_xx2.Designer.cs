@@ -4,6 +4,7 @@ using Cinema.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinema.Infrastructure.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240420220112_xx2")]
+    partial class xx2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -418,7 +421,7 @@ namespace Cinema.Infrastructure.Migrations
             modelBuilder.Entity("Cinema.Domain.Entities.Seat", b =>
                 {
                     b.HasOne("Cinema.Domain.Entities.Reservation", "Reservation")
-                        .WithMany()
+                        .WithMany("ReservedSeats")
                         .HasForeignKey("ReservationId");
 
                     b.HasOne("Cinema.Domain.Entities.Screening", "Screening")
@@ -486,6 +489,11 @@ namespace Cinema.Infrastructure.Migrations
             modelBuilder.Entity("Cinema.Domain.Entities.Movie", b =>
                 {
                     b.Navigation("Screenings");
+                });
+
+            modelBuilder.Entity("Cinema.Domain.Entities.Reservation", b =>
+                {
+                    b.Navigation("ReservedSeats");
                 });
 
             modelBuilder.Entity("Cinema.Domain.Entities.Screening", b =>
