@@ -161,10 +161,16 @@ namespace Cinema.Infrastructure.Migrations
                     b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsPaidFor")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ReservationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ScreeningId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketType")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalCost")

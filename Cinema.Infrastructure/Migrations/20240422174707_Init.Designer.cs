@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinema.Infrastructure.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    [Migration("20240420215610_xx")]
-    partial class xx
+    [Migration("20240422174707_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,25 +164,25 @@ namespace Cinema.Infrastructure.Migrations
                     b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsPaidFor")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ReservationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ScreeningId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TicketType")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalCost")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ScreeningId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -402,15 +402,7 @@ namespace Cinema.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cinema.Domain.Entities.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Screening");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Cinema.Domain.Entities.Screening", b =>
@@ -435,7 +427,7 @@ namespace Cinema.Infrastructure.Migrations
             modelBuilder.Entity("Cinema.Domain.Entities.Seat", b =>
                 {
                     b.HasOne("Cinema.Domain.Entities.Reservation", "Reservation")
-                        .WithMany("ReservedSeats")
+                        .WithMany()
                         .HasForeignKey("ReservationId");
 
                     b.HasOne("Cinema.Domain.Entities.Screening", "Screening")
@@ -503,11 +495,6 @@ namespace Cinema.Infrastructure.Migrations
             modelBuilder.Entity("Cinema.Domain.Entities.Movie", b =>
                 {
                     b.Navigation("Screenings");
-                });
-
-            modelBuilder.Entity("Cinema.Domain.Entities.Reservation", b =>
-                {
-                    b.Navigation("ReservedSeats");
                 });
 
             modelBuilder.Entity("Cinema.Domain.Entities.Screening", b =>

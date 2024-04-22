@@ -97,16 +97,25 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reserve(CreateReservationCommand command)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = command.ScreeningId });
-            //    return View("Reserve", screening);
-            //}
+            var validator = new CreateReservationCommandValidator();
 
-            var selectedSeats = command.SelectedSeats;
-            var screeningsId = command.ScreeningId;
+            var validationResult = validator.Validate(command);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = command.ScreeningId });
+
+                return View("Reserve", screening);
+            }
 
             await _mediator.Send(command);
+
+            this.SetNotificaton("success", "Reservation created.");
 
             return RedirectToAction(nameof(Index));
         }

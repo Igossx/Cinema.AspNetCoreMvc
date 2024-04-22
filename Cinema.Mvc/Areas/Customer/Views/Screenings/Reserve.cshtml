@@ -66,6 +66,16 @@
                         <h5>Zajęte miejsca:</h5>
                     </dt>
                     <dd class="col-6"><div class="seat reserved"></div></dd>
+
+                    <div class="form-group mt-5">
+                        <label for="ticketType"><h5>Wybierz typ biletu:</h5></label>
+                        <select class="form-control" id="ticketType" name="TicketType">
+                            @foreach (var ticketType in Enum.GetValues(typeof(TicketType)))
+                            {
+                                <option value="@ticketType">@ticketType</option>
+                            }
+                        </select>
+                    </div>
                 </dl>
             </div>
             <div class="col-8">

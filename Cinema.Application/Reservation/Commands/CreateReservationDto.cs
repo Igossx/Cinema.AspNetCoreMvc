@@ -15,6 +15,8 @@ namespace Cinema.Application.Reservation.Commands
         public decimal TotalCost { get; set; } = 0;
         public bool IsConfirmed { get; set; } = false;
 
-        //public TicketType? TicketType { get; set; }
+        public TicketType TicketType { get; set; }
+
+        public bool IsPaidFor { get; set; } = false;
     }
 }
