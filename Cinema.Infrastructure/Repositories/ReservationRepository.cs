@@ -21,11 +21,8 @@ namespace Cinema.Infrastructure.Repositories
             await _cinemaDbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Reservation reservation)
         {
-            var reservation = await _cinemaDbContext.Reservations.FindAsync(id) ??
-                throw new NotFoundException("Reservation not found.");
-
             _cinemaDbContext.Reservations.Remove(reservation);
             await _cinemaDbContext.SaveChangesAsync();
         }

@@ -35,7 +35,10 @@ namespace Cinema.Infrastructure.Repositories
 
         public async Task<IEnumerable<Screening>> GetAllAsync()
         {
-            return await _cinemaDbContext.Screenings.AsNoTracking().ToListAsync();
+            return await _cinemaDbContext.Screenings
+            .Include(s => s.Movie)
+            .Include(s => s.CinemaHall)
+            .AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<Screening>> GetScreeningsByMovieAsync(int movieId)
@@ -47,7 +50,10 @@ namespace Cinema.Infrastructure.Repositories
 
         public async Task<Screening> GetByIdAsync(int id)
         {
-            return await _cinemaDbContext.Screenings.FindAsync(id) ??
+            return await _cinemaDbContext.Screenings
+            .Include(s => s.Movie)
+            .Include(s => s.CinemaHall)
+            .FirstOrDefaultAsync(s => s.Id == id) ??
                 throw new NotFoundException("Screening not found.");
         }
 

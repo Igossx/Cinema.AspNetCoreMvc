@@ -2,11 +2,11 @@
 using Cinema.Application.Screening.Queries.GetAllScreenings;
 using Cinema.Application.Screening.Queries.GetAllScreeningsByMovie;
 using Cinema.Application.Screening.Queries.GetScreening;
-using Cinema.Domain.Entities;
-using Cinema.Domain.Enums;
 using Cinema.Mvc.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Scripting;
 using X.PagedList;
 
 namespace Cinema.Mvc.Areas.Customer.Controllers
@@ -85,6 +85,7 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         }
 
         // GET: Screenings/Details/5/Reserved
+        [Authorize]
         public async Task<IActionResult> Reserve(int screeningId)
         {
             var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = screeningId });
@@ -103,12 +104,12 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
 
             if (!validationResult.IsValid)
             {
-                foreach (var error in validationResult.Errors)
-                {
-                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
-                }
+                // Pobranie komunikatów o błędach do wyświetlenia w SweetAlert2
+                var errorMessage = string.Join("\n", validationResult.Errors.Select(e => e.ErrorMessage));
 
                 var screening = await _mediator.Send(new GetScreeningByIdQuery() { Id = command.ScreeningId });
+
+                ViewBag.ErrorMessage = errorMessage;
 
                 return View("Reserve", screening);
             }

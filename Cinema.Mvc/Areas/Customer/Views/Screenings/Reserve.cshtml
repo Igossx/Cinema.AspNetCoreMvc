@@ -253,4 +253,18 @@
             });
         }
     });
+    function showErrorAlert(errorMessage) {
+        if (errorMessage && errorMessage.trim() !== '') { // Sprawdź, czy errorMessage nie jest pusty
+            Swal.fire({
+                icon: 'error',
+                title: errorMessage,
+            });
+        }
+    }
+
+    // Wywołanie funkcji showErrorAlert po załadowaniu strony
+    window.onload = function () {
+        var errorMessage = '@Html.Raw(ViewBag.ErrorMessage)';
+        showErrorAlert(errorMessage); // Wywołanie funkcji showErrorAlert
+    };
 </script>

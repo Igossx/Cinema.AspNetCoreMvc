@@ -24,7 +24,7 @@ namespace Cinema.Application.Movie.Queries
 
         [Display(Name = "Kategoria")]
         public FilmCategory Category { get; set; }
-        public string? ImagePath { get; set; } // Ścieżka do pliku graficznego plakatu
+        public string? ImagePath { get; set; }
 
     }
 }

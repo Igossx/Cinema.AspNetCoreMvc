@@ -18,6 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -56,6 +57,10 @@
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="CinemaHall" asp-action="Index">Sale kinowe</a>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Screening" asp-action="Index">Projekcje</a>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="ApplicationUser" asp-action="Index">Użytkownicy</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Reservation" asp-action="Index">Rezerwacje</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Statistics" asp-action="Index">Statystyki</a>
+
+
                                 </div>
                             </li>
                         }
@@ -119,6 +124,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/toastr.js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     @if (notification != null)
     {
