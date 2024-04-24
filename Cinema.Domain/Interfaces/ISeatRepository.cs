@@ -12,5 +12,6 @@ namespace Cinema.Domain.Interfaces
         Task<IEnumerable<Seat>> GetSeatsByScreeningAsync(int screeningId);
         Task ReserveSeat(IEnumerable<Seat> seatsToReserve);
         Task AssignToReservation(IEnumerable<Seat> seatsToAssign, Guid reservationId);
+        Task RemoveFromReservation(Guid reservationId);
     }
 }

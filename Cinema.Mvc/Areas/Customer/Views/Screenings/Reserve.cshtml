@@ -207,9 +207,18 @@
         </div>
     </div>
 
-    <!-- Przycisk do zatwierdzenia rezerwacji -->
-    <div class="text-center mt-4">
-        <button id="reservationButton" type="submit" class="btn btn-primary">Zarezerwuj</button>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <!-- Przycisk do zatwierdzenia rezerwacji -->
+                <button id="reservationButton" type="submit" class="btn btn-outline-primary flex-shrink-0">
+                    Zarezerwuj
+                </button>
+                <a asp-action="Index" asp-controller="Screenings" class="btn btn-outline-danger flex-shrink-0 ml-3" style="margin-left: 8px;">
+                    Wyjdź
+                </a>
+            </div>
+        </div>
     </div>
 </form>
 
@@ -254,7 +263,7 @@
         }
     });
     function showErrorAlert(errorMessage) {
-        if (errorMessage && errorMessage.trim() !== '') { // Sprawdź, czy errorMessage nie jest pusty
+        if (errorMessage && errorMessage.trim() !== '') {
             Swal.fire({
                 icon: 'error',
                 title: errorMessage,

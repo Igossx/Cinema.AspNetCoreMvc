@@ -72,5 +72,20 @@ namespace Cinema.Infrastructure.Repositories
 
             await _cinemaDbContext.SaveChangesAsync();
         }
+
+        public async Task RemoveFromReservation(Guid reservationId)
+        {
+            var allSeatsForReservation = _cinemaDbContext.Seats
+                .Where(s => s.ReservationId == reservationId);
+
+            foreach (var seat in allSeatsForReservation)
+            {
+                seat.ReservationId = null;
+                seat.IsReserved = false;
+                _cinemaDbContext.Update(seat);
+            }
+
+            await _cinemaDbContext.SaveChangesAsync();
+        }
     }
 }
