@@ -9,14 +9,17 @@ namespace Cinema.Application.Reservation.Queries
         [Display(Name = "Tytuł filmu")]
         public string MovieTitle { get; set; } = default!;
 
-        [Display(Name = "Nazwa sali")]
-        public string CinemaHallName { get; set; } = default!;
+        [Display(Name = "Potwierdzona")]
+        public bool IsConfirmed { get; set; }
 
-        [Display(Name = "Data")]
-        public DateTime ScreeningDate { get; set; }
+        [Display(Name = "Email")]
+        public string UserEmail { get; set; } = default!;
 
-        [Display(Name = "Godzina")]
-        public TimeSpan ScreeningTime { get; set; }
+        [Display(Name = "Liczba miejsc")]
+        public int TotalSeats { get; set; }
+
+        [Display(Name = "Utworzono")]
+        public DateTime ReservationTime { get; set; }
 
         [Display(Name = "Koszt całkowity")]
         public decimal TotalCost { get; set; }

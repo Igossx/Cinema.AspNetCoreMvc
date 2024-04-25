@@ -6,7 +6,7 @@ namespace Cinema.Application.Reservation.Commands
     {
         public int ScreeningId { get; set; }
 
-        //public string UserId { get; set; } = default!;
+        public string UserId { get; set; } = default!;
 
         public DateTime ReservationTime { get; set; } = DateTime.UtcNow;
 

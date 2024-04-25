@@ -1,4 +1,5 @@
-﻿using Cinema.Application.Interfaces;
+﻿using CarWorkshop.Application.ApplicationUser;
+using Cinema.Application.Interfaces;
 using Cinema.Application.Movie.Commands.CreateMovie;
 using Cinema.Application.Services;
 using FluentValidation;
@@ -21,6 +22,7 @@ namespace Cinema.Application.Extensions
             services.AddScoped<ICinemaHallService, CinemaHallService>();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserContext, UserContext>();
         }
     }
 }

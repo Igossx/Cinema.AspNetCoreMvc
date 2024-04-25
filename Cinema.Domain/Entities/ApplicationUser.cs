@@ -6,5 +6,6 @@ namespace Cinema.Domain.Entities
     {
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
+        public List<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }

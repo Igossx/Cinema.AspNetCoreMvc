@@ -1,5 +1,7 @@
-﻿using Cinema.Domain.Interfaces;
+﻿using Cinema.Domain.Entities;
+using Cinema.Domain.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace Cinema.Application.Reservation.Queries.GetAllReservations
 {
@@ -7,13 +9,15 @@ namespace Cinema.Application.Reservation.Queries.GetAllReservations
     {
         private readonly IReservationRepository _reservationRepository;
         private readonly IScreeningRepository _screeningRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public GetAllReservationsQueryHandler(IReservationRepository reservationRepository,
-            IScreeningRepository screeningRepository)
+            IScreeningRepository screeningRepository,
+            UserManager<ApplicationUser> userManager)
         {
             _reservationRepository = reservationRepository;
             _screeningRepository = screeningRepository;
-
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<ReservationDto>> Handle(GetAllReservationsQuery request, CancellationToken cancellationToken)
@@ -24,6 +28,7 @@ namespace Cinema.Application.Reservation.Queries.GetAllReservations
 
             foreach (var reservation in reservations)
             {
+                var user = await _userManager.FindByIdAsync(reservation.UserId);
                 var screening = await _screeningRepository.GetByIdAsync(reservation.ScreeningId);
                 var movie = screening.Movie;
                 var cinemaHall = screening.CinemaHall;
@@ -32,9 +37,10 @@ namespace Cinema.Application.Reservation.Queries.GetAllReservations
                 {
                     Id = reservation.Id,
                     MovieTitle = movie.Title,
-                    CinemaHallName = cinemaHall.Name,
-                    ScreeningDate = screening.Date,
-                    ScreeningTime = screening.Time,
+                    IsConfirmed = reservation.IsConfirmed,
+                    TotalSeats = reservation.TotalSeats,
+                    ReservationTime = reservation.ReservationTime,
+                    UserEmail = user!.Email!,
                     TotalCost = reservation.TotalCost
                 };
 
