@@ -3,6 +3,7 @@ using Cinema.Domain.Interfaces;
 using Cinema.Infrastructure.Persistence;
 using Cinema.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace Cinema.Infrastructure.Repositories
 {
@@ -75,8 +76,7 @@ namespace Cinema.Infrastructure.Repositories
 
         public async Task RemoveFromReservation(Guid reservationId)
         {
-            var allSeatsForReservation = _cinemaDbContext.Seats
-                .Where(s => s.ReservationId == reservationId);
+            var allSeatsForReservation = await GetAllSeatsFromReservation(reservationId);
 
             foreach (var seat in allSeatsForReservation)
             {
@@ -86,6 +86,29 @@ namespace Cinema.Infrastructure.Repositories
             }
 
             await _cinemaDbContext.SaveChangesAsync();
+        }
+
+        public async Task<string> GetSeatsFromReservation(Guid reservationId)
+        {
+            var stringBuilder = new StringBuilder();
+
+            var allSeatsForReservation = await GetAllSeatsFromReservation(reservationId);
+
+            foreach (var seat in allSeatsForReservation)
+            {
+                stringBuilder.Append(seat.RowSign);
+                stringBuilder.Append(seat.SeatNumber.ToString());
+                stringBuilder.Append(" ");
+            }
+
+            return stringBuilder.ToString().TrimEnd();
+        }
+
+        public async Task<List<Seat>> GetAllSeatsFromReservation(Guid reservationId)
+        {
+            return await _cinemaDbContext.Seats
+                .Where(s => s.ReservationId == reservationId)
+                .ToListAsync();
         }
     }
 }

@@ -1,0 +1,71 @@
+﻿@model ReservationDetailsDto
+
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h2 class="text-primary display-4">Szczegóły rezerwacji</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <dl class="row">
+                <dt class="col-4">Id rezerwacji:</dt>
+                <dd class="col-8">@Model.Id</dd>
+
+                <dt class="col-4">Tytuł filmu:</dt>
+                <dd class="col-8">@Model.MovieTitle</dd>
+
+                <dt class="col-4">Nazwa sali kinowej:</dt>
+                <dd class="col-8">@Model.CinemaHallName</dd>
+
+                <dt class="col-4">Data projekcji:</dt>
+                <dd class="col-8">@Model.ScreeningDate.ToString("dd.MM.yyyy")</dd>
+
+                <dt class="col-4">Godzina projekcji:</dt>
+                <dd class="col-8">@Model.ScreeningTime.ToString("hh\\:mm")</dd>
+
+                <dt class="col-4">Potwierdzona:</dt>
+                <dd class="col-8">@Model.IsConfirmed</dd>
+
+                <dt class="col-4">Adres e-mail użytkownika:</dt>
+                <dd class="col-8">@Model.UserEmail</dd>
+
+                <dt class="col-4">Id użytkownika:</dt>
+                <dd class="col-8">@Model.UserId</dd>
+
+                <dt class="col-4">Liczba miejsc:</dt>
+                <dd class="col-8">@Model.TotalSeats</dd>
+
+                <dt class="col-4">Czas rezerwacji:</dt>
+                <dd class="col-8">@Model.ReservationTime.ToString("dd.MM.yyyy hh\\:mm")</dd>
+
+                <dt class="col-4">Całkowity koszt:</dt>
+                <dd class="col-8">@Model.TotalCost PLN</dd>
+
+                <dt class="col-4">Typ biletu:</dt>
+                <dd class="col-8">@Model.TicketType</dd>
+
+                <dt class="col-4">Opłacona:</dt>
+                <dd class="col-8">@Model.IsPaidFor</dd>
+
+                <dt class="col-4">Zarezerwowane miejsca:</dt>
+                <dd class="col-8">@Model.ReservedSeats</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <a asp-action="Index" class="btn btn-primary mt-2"><i class="fas fa-sign-out-alt"></i> Wróć</a>
+        </div>
+    </div>
+</div>

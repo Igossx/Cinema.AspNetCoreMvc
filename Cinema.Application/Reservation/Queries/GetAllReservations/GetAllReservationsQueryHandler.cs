@@ -31,7 +31,6 @@ namespace Cinema.Application.Reservation.Queries.GetAllReservations
                 var user = await _userManager.FindByIdAsync(reservation.UserId);
                 var screening = await _screeningRepository.GetByIdAsync(reservation.ScreeningId);
                 var movie = screening.Movie;
-                var cinemaHall = screening.CinemaHall;
 
                 var reservationDto = new ReservationDto()
                 {

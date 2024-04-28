@@ -50,5 +50,12 @@ namespace Cinema.Infrastructure.Repositories
                 .Where(s => seatIds.Contains(s.Id))
                 .AsNoTracking().ToListAsync();
         }
+
+        public async Task<IEnumerable<Reservation>> GetAllReservationsForUser(string UserId)
+        {
+            return await _cinemaDbContext.Reservations
+                .Where(r => r.UserId == UserId)
+                .AsNoTracking().ToListAsync();
+        }
     }
 }

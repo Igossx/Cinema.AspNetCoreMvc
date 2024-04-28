@@ -46,6 +46,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Contact">Kontakt</a>
                         </li>
+                        <li class="nav-item">
+                            @if (User!.Identity!.IsAuthenticated)
+                            {
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Reservations" asp-action="Index">
+                                    <i class="fa-solid fa-clipboard mr-3"></i> Moje rezerwacje
+                                </a>
+                            }
+                        </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
