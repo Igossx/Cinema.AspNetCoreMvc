@@ -115,3 +115,12 @@ body {
     position: absolute;
     left: -9999px;
 }
+
+.reservation-card {
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+    .reservation-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }

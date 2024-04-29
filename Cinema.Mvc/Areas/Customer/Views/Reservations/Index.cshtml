@@ -13,9 +13,8 @@
                     <h3 class="fw-normal mb-0 text-black">Moje rezerwacje</h3>
                     <div>
                         <p class="mb-0">
-                            <span class="text-muted">Sort by:</span> <a href="#!" class="text-body">
-                                cena <i class="fas fa-angle-down mt-1"></i>
-                            </a>
+                            <span class="text-muted">Sortuj wg:</span>
+                            <a href="#" class="text-body" onclick="toggleSortOrder()">cena <i class="fas fa-angle-down mt-1"></i></a>
                         </p>
                     </div>
                 </div>
@@ -24,7 +23,7 @@
                 {
                     @foreach (var reservation in Model)
                     {
-                        <div class="card rounded-3 mb-4">
+                        <div class="card rounded-3 mb-4 reservation-card">
                             <div class="card-body p-4">
                                 <div class="row d-flex justify-content-between align-items-center">
                                     <div class="col-md-2 col-lg-2 col-xl-2">
@@ -34,7 +33,7 @@
                                         <p>
                                             <span class="text-muted">Typ biletów: </span>
                                             @reservation.TicketType <br />
-                                            <span class="text-muted">Opłacony: </span>
+                                            <span class="text-muted">Opłacona: </span>
                                             @(reservation.IsPaidFor ? "Tak" : "Nie")
                                         </p>
                                     </div>
@@ -50,27 +49,29 @@
 
                                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                         <a href="#"><i class="fa-solid fa-info-circle" style="color: #43e123; margin-right: 15px; font-size: 1.3rem;"></i></a>
-                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                        <a href="#!" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@reservation.Id"><i class="fas fa-trash fa-lg"></i></a>
                                     </div>
+
+                                    <partial name="_DeleteModal" model="@reservation" />
                                 </div>
                             </div>
                         </div>
                     }
-                }
+                }       
                 else
                 {
                     <h2 class="pb-3">Nie znaleziono żadej rezerwacji</h2>
                 }
 
-                <div class="card mb-4">
-                    <div class="card-body p-4 d-flex flex-row">
-                        <div data-mdb-input-init class="form-outline flex-fill">
-                            <input type="text" id="form1" class="form-control form-control-lg" />
-                        </div>
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-warning btn-lg ms-3">Szukaj</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function toggleSortOrder() {
+        var currentSortOrder = '@ViewBag.SortOrder';
+        var newSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+        window.location.href = '@Url.Action("Index")' + '?sortOrder=' + newSortOrder;
+    }
+</script>
