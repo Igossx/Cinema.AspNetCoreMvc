@@ -12,5 +12,7 @@ namespace Cinema.Application.Movie.Commands
         public FilmCategory Category { get; set; }
         public IFormFile? UpdatePosterImage { get; set; } // Przesłany plik graficzny plakatu
         public string? ImagePath { get; set; } // Ścieżka do pliku graficznego plakatu
+        public string TrailerLink { get; set; } = default!;
+        public string Director { get; set; } = default!;
     }
 }

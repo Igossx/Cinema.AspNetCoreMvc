@@ -32,6 +32,12 @@ namespace Cinema.Application.Movie.Commands.UpdateMovie
             RuleFor(m => m.Duration)
                 .NotEmpty().WithMessage("Please enter film duration")
                 .InclusiveBetween(1, 200).WithMessage("Duration must be between 1 and 200 minutes.");
+
+            RuleFor(m => m.Director)
+                .NotEmpty().WithMessage("Please enter director");
+
+            RuleFor(m => m.TrailerLink)
+                .NotEmpty().WithMessage("Please enter movie trailer");
         }
     }
 }

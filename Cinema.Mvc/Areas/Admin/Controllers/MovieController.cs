@@ -74,7 +74,9 @@ namespace Cinema.Mvc.Areas.Admin.Controllers
                 Duration = movie.Duration,
                 Category = movie.Category,
                 UpdatePosterImage = null,
-                ImagePath = movie.ImagePath
+                ImagePath = movie.ImagePath,
+                Director = movie.Director,
+                TrailerLink = movie.TrailerLink
             };
 
             return View(updateMovieCommand);

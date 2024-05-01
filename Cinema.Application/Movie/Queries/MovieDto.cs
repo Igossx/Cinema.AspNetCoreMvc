@@ -26,5 +26,11 @@ namespace Cinema.Application.Movie.Queries
         public FilmCategory Category { get; set; }
         public string? ImagePath { get; set; }
 
+        [Display(Name = "Reżyser")]
+        public string Director { get; set; } = default!;
+
+        [Display(Name = "Trailer")]
+        public string TrailerLink { get; set; } = default!;
+
     }
 }

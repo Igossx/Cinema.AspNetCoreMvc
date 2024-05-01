@@ -1,0 +1,58 @@
+﻿@model ReservationUserDto
+
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<section class="h-100" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-8">
+
+                <div class="card rounded-3 mb-4 reservation-card">
+                    <div class="card-body p-4">
+                        <h3 class="fw-normal mb-4 text-black">Reservation Details</h3>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="lead fw-normal mb-2">Movie Title:</p>
+                                <p>@Model.MovieTitle</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="lead fw-normal mb-2">Ticket Type:</p>
+                                <p>@Model.TicketType</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="lead fw-normal mb-2">Paid:</p>
+                                <p>@(Model.IsPaidFor ? "Yes" : "No")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="lead fw-normal mb-2">Total Seats:</p>
+                                <p>@Model.TotalSeats</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="lead fw-normal mb-2">Total Cost:</p>
+                                <p>@Model.TotalCost.ToString("0.00") PLN</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-end">
+                            <a href="#"><i class="fa-solid fa-info-circle" style="color: #43e123; margin-right: 15px; font-size: 1.3rem;"></i></a>
+                            <a href="#!" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@Model.Id"><i class="fas fa-trash fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="#" class="btn btn-primary">Back</a>
+                </div>
+
+                <partial name="_DeleteModal" model="@Model" />
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -25,8 +25,9 @@ namespace Cinema.Application.Movie.Queries.GetMovie
                 Duration = movie.Duration,
                 Category = movie.Category,
                 EncodedTitle = movie.EncodedTitle,
-                ImagePath = movie.ImagePath
-
+                ImagePath = movie.ImagePath,
+                Director = movie.Director,
+                TrailerLink = movie.TrailerLink
             };
 
             return movieDto;

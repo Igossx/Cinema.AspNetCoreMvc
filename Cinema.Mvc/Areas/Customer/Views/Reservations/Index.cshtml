@@ -48,8 +48,8 @@
                                     </div>
 
                                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                        <a href="#"><i class="fa-solid fa-info-circle" style="color: #43e123; margin-right: 15px; font-size: 1.3rem;"></i></a>
-                                        <a href="#!" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@reservation.Id"><i class="fas fa-trash fa-lg"></i></a>
+                                        <a asp-action="Details" asp-controller="Reservations" asp-route-id="@reservation.Id"><i class="fa-solid fa-info-circle" style="color: #43e123; margin-right: 15px; font-size: 1.3rem;"></i></a>
+                                        <a class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@reservation.Id"><i class="fas fa-trash fa-lg"></i></a>
                                     </div>
 
                                     <partial name="_DeleteModal" model="@reservation" />

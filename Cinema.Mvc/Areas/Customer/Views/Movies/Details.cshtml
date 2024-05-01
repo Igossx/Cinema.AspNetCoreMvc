@@ -4,47 +4,45 @@
     ViewData["Title"] = "Movie Details";
 }
 
-<form asp-action="Details" method="post">
-    <section class="py-2">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6">
-                    <img class="card-img-top mb-5 mb-md-0" width="500" height="600" src="@Model.Movie.ImagePath" alt="Product Image" />
+<section class="py-2">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0" width="500" height="600" src="@Model.Movie!.ImagePath" alt="Product Image" />
+            </div>
+            <div class="col-md-6">
+                <div class="small mb-0">
+                    <div class="badge bg-primary bg-gradient rounded-pill mb-1" style="font-size: 16px;">@Model.Movie.Category</div>
                 </div>
-                <div class="col-md-6">
-                    <div class="small mb-0">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-1" style="font-size: 16px;">@Model.Movie.Category</div>
-                    </div>
-                    <h1 class="display-5 fw-bolder">@Model.Movie.Title</h1>
-                    <div class="fs-5 mb-3">
-                        <div class="d-flex align-items-center">
-                            <div class="small">
-                                <div class="fw-bold">Reżyser</div>
-                                <div class="text-muted">@Model.Movie.ReleaseDate.ToString("dd.MM.yyyy") &middot; @Model.Movie.Duration min.</div>
-                            </div>
+                <h1 class="display-5 fw-bolder">@Model.Movie.Title</h1>
+                <div class="fs-5 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="small">
+                            <div class="fw-bold">@Model.Movie.Director</div>
+                            <div class="text-muted">@Model.Movie.ReleaseDate.ToString("dd.MM.yyyy") &middot; @Model.Movie.Duration min.</div>
                         </div>
                     </div>
-                    <p class="lead">@Model.Movie.Description</p>
-                    <div class="d-flex">
-                        <button class="btn btn-outline-success flex-shrink-0" asp-controller="Screenings" asp-route-id="@Model.Movie.Id" asp-action="ByMovie">
-                            Kup bilet
-                        </button>
-                        <a href="#" class="btn btn-outline-primary flex-shrink-0 ml-3" style="margin-left: 8px;" target="_blank">
-                            Zwiastun
-                        </a>
-                    </div>
+                </div>
+                <p class="lead">@Model.Movie.Description</p>
+                <div class="d-flex">
+                    <button class="btn btn-outline-success flex-shrink-0" asp-controller="Screenings" asp-route-id="@Model.Movie.Id" asp-action="ByMovie">
+                        Kup bilet
+                    </button>
+                    <button class="btn btn-outline-primary flex-shrink-0 ml-3" style="margin-left: 8px;" data-bs-toggle="modal" data-tagVideo="@Model.Movie.TrailerLink" data-bs-target="#videoModal">
+                        Zwiastun
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
-</form>
+    </div>
+</section>
 
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
         <h2 class="fw-bolder mb-4">Obejrzyj również</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-2 row-cols-xl-4 justify-content-center">
-            @foreach (var movie in Model.RandomMovies)
+            @foreach (var movie in Model.RandomMovies!)
             {
                 <div class="col-lg-4 mb-5 movie-card">
                     <div class="card h-100 shadow border-0">
@@ -79,3 +77,40 @@
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="videoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="trailerModalLabel">@Model.Movie!.Title - Zwiastun</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="ratio ratio-16x9">
+                    <iframe src="" allow="autoplay;" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        autoPlayYouTubeModal();
+    });
+
+    // Get and autoplay Video from data
+    function autoPlayYouTubeModal() {
+        var triggerOpen = $("body").find('[data-tagVideo]');
+        triggerOpen.click(function () {
+            var theModal = $(this).data("bs-target"),
+                videoSRC = $(this).attr("data-tagVideo"),
+                videoSRCauto = videoSRC + "?autoplay=1";
+            $(theModal + ' iframe').attr('src', videoSRCauto);
+            $(theModal + ' button.btn-close').click(function () {
+                $(theModal + ' iframe').attr('src', videoSRC);
+            });
+        });
+    }
+</script>

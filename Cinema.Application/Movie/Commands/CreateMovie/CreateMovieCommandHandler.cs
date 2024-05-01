@@ -24,7 +24,9 @@ namespace Cinema.Application.Movie.Commands.CreateMovie
                 ReleaseDate = request.ReleaseDate,
                 Duration = request.Duration,
                 Category = request.Category,
-                PosterImage = request.PosterImage
+                PosterImage = request.PosterImage,
+                TrailerLink = request.TrailerLink,
+                Director = request.Director
             };
 
             if (movie.PosterImage != null)

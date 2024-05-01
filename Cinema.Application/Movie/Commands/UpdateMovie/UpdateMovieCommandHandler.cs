@@ -25,6 +25,8 @@ namespace Cinema.Application.Movie.Commands.UpdateMovie
             movieToUpdate.Duration = request.Duration;
             movieToUpdate.ReleaseDate = request.ReleaseDate;
             movieToUpdate.PosterImage = request.UpdatePosterImage;
+            movieToUpdate.Director = request.Director;
+            movieToUpdate.TrailerLink = request.TrailerLink;
 
             if (request.UpdatePosterImage != null)
             {

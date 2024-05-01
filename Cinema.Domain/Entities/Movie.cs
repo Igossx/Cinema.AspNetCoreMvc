@@ -13,8 +13,9 @@ namespace Cinema.Domain.Entities
         public int Duration { get; set; }
         public FilmCategory Category { get; set; }
         public string? ImagePath { get; set; } // Ścieżka do pliku graficznego plakatu
-
         public IFormFile? PosterImage { get; set; } // Przesłany plik graficzny plakatu
+        public string TrailerLink { get; set; } = default!;
+        public string Director { get; set; } = default!;
 
         public List<Screening> Screenings { get; set; } = new List<Screening>();
 

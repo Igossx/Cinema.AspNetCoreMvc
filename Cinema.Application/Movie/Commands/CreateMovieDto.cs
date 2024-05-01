@@ -11,5 +11,7 @@ namespace Cinema.Application.Movie.Commands
         public int Duration { get; set; }
         public FilmCategory Category { get; set; }
         public IFormFile? PosterImage { get; set; } // Przesłany plik graficzny plakatu
+        public string TrailerLink { get; set; } = default!;
+        public string Director { get; set; } = default!;
     }
 }

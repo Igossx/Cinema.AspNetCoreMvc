@@ -1,5 +1,6 @@
 ﻿using Cinema.Application.Reservation.Commands.DeleteReservation;
 using Cinema.Application.Reservation.Queries.GetAllReservationsUser;
+using Cinema.Application.Screening.Queries.GetScreening;
 using Cinema.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -47,6 +48,14 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
             this.SetNotificaton("success", "Reservation deleted.");
 
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Reservation/Details/5
+        public async Task<ActionResult> Details(Guid id)
+        {
+            //var reservation = await _mediator.Send(new GetReservationUserByIdQuery() { Id = id });
+
+            return View();
         }
     }
 }
