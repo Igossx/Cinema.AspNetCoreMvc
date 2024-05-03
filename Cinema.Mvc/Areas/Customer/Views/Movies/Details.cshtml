@@ -25,9 +25,9 @@
                 </div>
                 <p class="lead">@Model.Movie.Description</p>
                 <div class="d-flex">
-                    <button class="btn btn-outline-success flex-shrink-0" asp-controller="Screenings" asp-route-id="@Model.Movie.Id" asp-action="ByMovie">
+                    <a class="btn btn-outline-success flex-shrink-0" asp-controller="Screenings" asp-route-id="@Model.Movie.Id" asp-action="ByMovie">
                         Kup bilet
-                    </button>
+                    </a>
                     <button class="btn btn-outline-primary flex-shrink-0 ml-3" style="margin-left: 8px;" data-bs-toggle="modal" data-tagVideo="@Model.Movie.TrailerLink" data-bs-target="#videoModal">
                         Zwiastun
                     </button>
@@ -35,6 +35,9 @@
             </div>
         </div>
     </div>
+
+    <partial name="_VideoModal" model="@Model" />
+
 </section>
 
 <!-- Related items section-->
@@ -77,23 +80,6 @@
         </div>
     </div>
 </section>
-
-<!-- Modal -->
-<div class="modal fade" id="videoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="trailerModalLabel">@Model.Movie!.Title - Zwiastun</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="ratio ratio-16x9">
-                    <iframe src="" allow="autoplay;" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     $(document).ready(function () {

@@ -13,7 +13,6 @@
     </div>
 </div>
 
-<!-- Formularz rezerwacji -->
 <form id="reservationForm" asp-action="Reserve" method="post">
     <input type="hidden" name="ScreeningId" value="@Model.Id" />
     <input type="hidden" id="selectedSeats" name="SelectedSeats" />
@@ -92,7 +91,7 @@
                                 @for (int seat = 1; seat < 9; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <label class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                    <label class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">
                                         @if (currentSeat.IsReserved)
                                         {
                                             <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
@@ -121,7 +120,7 @@
                                 @for (int seat = 1; seat < 11; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <label class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                    <label class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">
                                         @if (currentSeat.IsReserved)
                                         {
                                             <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
@@ -152,7 +151,7 @@
                                 @for (int seat = 1; seat < 13; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <div class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                    <div class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">
                                         @if (currentSeat.IsReserved)
                                         {
                                             <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
@@ -182,7 +181,7 @@
                                 @for (int seat = 1; seat < 17; seat++)
                                 {
                                     var currentSeat = Model.Seats.FirstOrDefault(s => s.RowSign == currentRowLetter && s.SeatNumber == seat);
-                                    <div class="seat @(currentSeat.IsReserved ? "reserved" : "available")">
+                                    <div class="seat @(currentSeat!.IsReserved ? "reserved" : "available")">
                                         @if (currentSeat.IsReserved)
                                         {
                                             <input type="checkbox" name="SelectedSeats" class="seat-checkbox" value="@currentSeat.Id" disabled />
@@ -210,8 +209,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12 text-center">
-                <!-- Przycisk do zatwierdzenia rezerwacji -->
-                <button id="reservationButton" type="submit" class="btn btn-outline-primary flex-shrink-0">
+                <button id="reservationButton" type="button" class="btn btn-outline-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#confirmationModal">
                     Zarezerwuj
                 </button>
                 <a asp-action="Index" asp-controller="Screenings" class="btn btn-outline-danger flex-shrink-0 ml-3" style="margin-left: 8px;">
@@ -220,6 +218,9 @@
             </div>
         </div>
     </div>
+
+    <partial name="_ReserveConfirmationModal" model="@Model" />
+
 </form>
 
 <script>
@@ -262,6 +263,7 @@
             });
         }
     });
+
     function showErrorAlert(errorMessage) {
         if (errorMessage && errorMessage.trim() !== '') {
             Swal.fire({

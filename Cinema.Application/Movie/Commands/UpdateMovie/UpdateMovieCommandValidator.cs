@@ -14,9 +14,9 @@ namespace Cinema.Application.Movie.Commands.UpdateMovie
                 .Custom((value, context) =>
                 {
                     var existingMovie = movieRepository.GetByTitleAsync(value).Result;
-                    if (existingMovie != null)
+                    if (existingMovie != null && existingMovie.Id != context.InstanceToValidate.Id)
                     {
-                        context.AddFailure($"{value} is not unique title for movie");
+                        context.AddFailure($"{value} is not a unique title for a movie.");
                     }
                 });
 

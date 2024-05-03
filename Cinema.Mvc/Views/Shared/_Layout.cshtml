@@ -2,6 +2,8 @@
     var notification = TempData["Notification"] != null
     ? (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)!
     : null;
+    var action = ViewContext.RouteData.Values["Action"]?.ToString();
+    var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
 }
 
 <!DOCTYPE html>
@@ -38,10 +40,10 @@
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Home">O kinie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Movies" asp-action="Index">Aktualne filmy</a>
+                            <a class="nav-link text-dark @(controller == "Movies" && action == "Index" ? "active" : "")" asp-area="Customer" asp-controller="Movies" asp-action="Index">Aktualne filmy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Screenings" asp-action="Index">Kup bilet</a>
+                            <a class="nav-link text-dark active" asp-area="Customer" asp-controller="Screenings" asp-action="Index">Kup bilet</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Faq">FAQ</a>
