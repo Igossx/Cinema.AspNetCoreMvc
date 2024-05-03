@@ -3,11 +3,15 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+@{
+    var page = ViewContext.RouteData.Values["Page"]?.ToString();
+}
+
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
+            <a class="nav-link text-dark @(page == "/Account/Manage/Index" ? "active" : "")" asp-area="Identity" asp-page="/Account/Manage/Index"
                title="Manage"><i class="fa-solid fa-circle-user"></i> @UserManager.GetUserName(User)</a>
         </li>
         <li class="nav-item">
@@ -21,9 +25,9 @@
     else
     {
         <li class="nav-item mx-2">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+            <a class="nav-link text-dark @(page == "/Account/Login" ? "active" : "")" asp-area="Identity" asp-page="/Account/Login">
                 <i class="fa-solid fa-circle-user fa-lg mx-2"></i>
-                 Zaloguj
+                Zaloguj
             </a>
         </li>
     }

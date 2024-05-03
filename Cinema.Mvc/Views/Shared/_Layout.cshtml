@@ -1,7 +1,7 @@
 ﻿@{
     var notification = TempData["Notification"] != null
-    ? (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)!
-    : null;
+                    ? (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)!
+                    : null;
     var action = ViewContext.RouteData.Values["Action"]?.ToString();
     var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
 }
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -37,24 +39,24 @@
                 <div class=" collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto ">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Home">O kinie</a>
+                            <a class="nav-link text-dark @(controller == "Menu" && action == "Home" ? "active" : "")" asp-area="Customer" asp-controller="Menu" asp-action="Home">O kinie</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark @(controller == "Movies" && action == "Index" ? "active" : "")" asp-area="Customer" asp-controller="Movies" asp-action="Index">Aktualne filmy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark active" asp-area="Customer" asp-controller="Screenings" asp-action="Index">Kup bilet</a>
+                            <a class="nav-link text-dark @(controller == "Screenings" && action == "Index" || action=="ByMovie" ? "active" : "")" asp-area="Customer" asp-controller="Screenings" asp-action="Index">Kup bilet</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Faq">FAQ</a>
+                            <a class="nav-link text-dark @(controller == "Menu" && action == "Faq" ? "active" : "")" asp-area="Customer" asp-controller="Menu" asp-action="Faq">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Menu" asp-action="Contact">Kontakt</a>
+                            <a class="nav-link text-dark @(controller == "Menu" && action == "Contact" ? "active" : "")" asp-area="Customer" asp-controller="Menu" asp-action="Contact">Kontakt</a>
                         </li>
                         <li class="nav-item">
                             @if (User!.Identity!.IsAuthenticated)
                             {
-                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Reservations" asp-action="Index">
+                                <a class="nav-link text-dark @(controller == "Reservations" && action == "Index" ? "active" : "")" asp-area="Customer" asp-controller="Reservations" asp-action="Index">
                                     <i class="fa-solid fa-clipboard mr-3"></i> Moje rezerwacje
                                 </a>
                             }
@@ -72,8 +74,6 @@
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="ApplicationUser" asp-action="Index">Użytkownicy</a>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Reservation" asp-action="Index">Rezerwacje</a>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Statistics" asp-action="Index">Statystyki</a>
-
-
                                 </div>
                             </li>
                         }
