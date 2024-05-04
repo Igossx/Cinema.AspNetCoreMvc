@@ -118,7 +118,6 @@ body {
 
 .reservation-card {
     transition: box-shadow 0.3s ease-in-out;
-    cursor: pointer;
 }
 
     .reservation-card:hover {
@@ -140,9 +139,11 @@ body {
 }
 
 .navbar-nav .nav-link {
-    font-family: 'Roboto', sans-serif;
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
 }
 
 .dropdown-menu-right .dropdown-item {
-    font-family: 'Roboto', sans-serif;
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
 }

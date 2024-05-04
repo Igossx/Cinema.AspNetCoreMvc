@@ -45,7 +45,7 @@
                                 Rezerwuj
                             </a>
                         }
-                        <a asp-action="ByMovie" asp-controller="Screenings" class="btn btn-outline-danger flex-shrink-0 ml-3" style="margin-left: 8px;">
+                        <a asp-action="ByMovie" asp-controller="Screenings" asp-route-id="@Model.MovieId" class="btn btn-outline-primary flex-shrink-0 ml-3" style="margin-left: 8px;">
                             Wróć
                         </a>
                     </div>

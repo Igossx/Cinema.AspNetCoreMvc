@@ -38,7 +38,8 @@ namespace Cinema.Application.Reservation.Queries.GetAllReservationsUser
                     TotalSeats = reservation.TotalSeats,
                     TicketType = reservation.TicketType,
                     IsPaidFor = reservation.IsPaidFor,
-                    TotalCost = reservation.TotalCost
+                    TotalCost = reservation.TotalCost,
+                    IsConfirmed = reservation.IsConfirmed
                 };
 
                 reservationDtos.Add(reservationUserDto);

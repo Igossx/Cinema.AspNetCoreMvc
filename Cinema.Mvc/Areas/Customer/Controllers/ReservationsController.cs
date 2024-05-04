@@ -1,6 +1,8 @@
 ﻿using Cinema.Application.Reservation.Commands.DeleteReservation;
+using Cinema.Application.Reservation.Commands.UpdateIsConfirmed;
 using Cinema.Application.Reservation.Queries.GetAllReservationsUser;
-using Cinema.Application.Screening.Queries.GetScreening;
+using Cinema.Application.Reservation.Queries.GetPaymentForm;
+using Cinema.Application.Reservation.Queries.GetReservationUser;
 using Cinema.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -53,9 +55,29 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         // GET: Reservation/Details/5
         public async Task<ActionResult> Details(Guid id)
         {
-            //var reservation = await _mediator.Send(new GetReservationUserByIdQuery() { Id = id });
+            var reservation = await _mediator.Send(new GetReservationByIdUserQuery() { Id = id });
 
-            return View();
+            return View(reservation);
+        }
+
+        // POST Reservation/Details/5/ConfirmReservation
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmReservation(Guid id)
+        {
+            await _mediator.Send(new UpdateIsConfirmedReservationCommand() { Id = id });
+
+            this.SetNotificaton("success", "Reservation confirmed.");
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Screenings/Details/5/PayForReservation
+        public async Task<IActionResult> PayForReservation(Guid id)
+        {
+            var paymentForm = await _mediator.Send(new GetPaymentFormQuery() { Id = id });
+
+            return View(paymentForm);
         }
     }
 }

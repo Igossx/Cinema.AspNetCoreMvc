@@ -10,5 +10,6 @@ namespace Cinema.Application.Reservation.Queries
         public TicketType TicketType { get; set; }
         public int TotalSeats { get; set; }
         public decimal TotalCost { get; set; }
+        public bool IsConfirmed { get; set; } = false;
     }
 }

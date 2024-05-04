@@ -1,4 +1,4 @@
-﻿@model ReservationUserDto
+﻿@model ReservationUserDetailsDto
 
 @{
     ViewData["Title"] = "Reservation Details";
@@ -11,48 +11,76 @@
 
                 <div class="card rounded-3 mb-4 reservation-card">
                     <div class="card-body p-4">
-                        <h3 class="fw-normal mb-4 text-black">Reservation Details</h3>
+                        <h3 class="fw-normal mb-4 text-black">Szczegóły rezerwacji</h3>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <p class="lead fw-normal mb-2">Movie Title:</p>
+                                <div class="lead fw-normal mb-2">Film:</div>
                                 <p>@Model.MovieTitle</p>
                             </div>
                             <div class="col-md-6">
-                                <p class="lead fw-normal mb-2">Ticket Type:</p>
+                                <div class="lead fw-normal mb-2">Nazwa sali:</div>
+                                <p>@Model.CinemaHallName</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="lead fw-normal mb-2">Rodzaj biletów:</div>
                                 <p>@Model.TicketType</p>
                             </div>
-                        </div>
-                        <div class="row mb-3">
                             <div class="col-md-6">
-                                <p class="lead fw-normal mb-2">Paid:</p>
-                                <p>@(Model.IsPaidFor ? "Yes" : "No")</p>
+                                <div class="lead fw-normal mb-2">Data i godzina:</div>
+                                <p>@Model.ScreeningDate.ToShortDateString() &middot; @Model.ScreeningTime.ToString("hh\\:mm")</p>
                             </div>
                             <div class="col-md-6">
-                                <p class="lead fw-normal mb-2">Total Seats:</p>
-                                <p>@Model.TotalSeats</p>
+                                <div class="lead fw-normal mb-2">Opłacona:</div>
+                                <p>@(Model.IsPaidFor ? "Tak" : "Nie")</p>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
-                                <p class="lead fw-normal mb-2">Total Cost:</p>
+                                <div class="lead fw-normal mb-2">Potwierdzona:</div>
+                                <p>@(Model.IsConfirmed ? "Tak" : "Nie")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="lead fw-normal mb-2">Zarezerwowane miejsca:</div>
+                                <p>@Model.ReservedSeats</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="lead fw-normal mb-2">Do zapłaty:</div>
                                 <p>@Model.TotalCost.ToString("0.00") PLN</p>
                             </div>
                         </div>
                         <hr>
-                        <div class="text-end">
-                            <a href="#"><i class="fa-solid fa-info-circle" style="color: #43e123; margin-right: 15px; font-size: 1.3rem;"></i></a>
-                            <a href="#!" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@Model.Id"><i class="fas fa-trash fa-lg"></i></a>
-                        </div>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <a href="#" class="btn btn-primary">Back</a>
+                    @if (Model.IsPaidFor)
+                    {
+                        <a asp-action="PayForReservation" asp-controller="Reservations" asp-route-id="@Model.Id" class="btn btn-outline-success flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">
+                            Drukuj bilet
+                        </a>
+                    }
+                    else
+                    {
+                        @if (!Model.IsConfirmed)
+                        {
+                            <button id="reservationButton" type="button" class="btn btn-outline-success flex-shrink-0" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                Potwierdź rezerwację
+                            </button>
+                        }
+                        else
+                        {
+                            <a asp-action="PayForReservation" asp-controller="Reservations" asp-route-id="@Model.Id" class="btn btn-outline-success flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">
+                                Opłać rezerwację
+                            </a>
+                        }
+                    }
+                    <a asp-action="Index" asp-controller="Reservations" class="btn btn-outline-primary flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">
+                        Wróć
+                    </a>
                 </div>
-
-                <partial name="_DeleteModal" model="@Model" />
 
             </div>
         </div>
     </div>
+
+    <partial name="_ReservationConfirmationModal" model="@Model" />
+
 </section>
