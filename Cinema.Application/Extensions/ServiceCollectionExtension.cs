@@ -23,6 +23,7 @@ namespace Cinema.Application.Extensions
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
         }
     }
 }

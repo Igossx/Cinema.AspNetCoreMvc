@@ -1,5 +1,4 @@
-﻿using Cinema.Domain.Entities;
-using Cinema.Domain.Interfaces;
+﻿using Cinema.Domain.Interfaces;
 using MediatR;
 
 namespace Cinema.Application.Reservation.Commands.UpdateIsConfirmed

@@ -53,7 +53,7 @@
                 <div class="text-center">
                     @if (Model.IsPaidFor)
                     {
-                        <a asp-action="PayForReservation" asp-controller="Reservations" asp-route-id="@Model.Id" class="btn btn-outline-success flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">
+                        <a asp-action="GeneratePdfAndPrint" asp-controller="Reservations" asp-route-id="@Model.Id" class="btn btn-outline-success flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">
                             Drukuj bilet
                         </a>
                     }

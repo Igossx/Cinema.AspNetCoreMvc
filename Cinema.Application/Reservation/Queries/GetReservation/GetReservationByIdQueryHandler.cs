@@ -49,7 +49,8 @@ namespace Cinema.Application.Reservation.Queries.GetReservation
                 ReservationTime = reservation.ReservationTime,
                 TotalCost = reservation.TotalCost,
                 TicketType = reservation.TicketType,
-                ReservedSeats = reservedSeats
+                ReservedSeats = reservedSeats,
+                IsPaidFor = reservation.IsPaidFor
             };
 
             return reservationDto;
