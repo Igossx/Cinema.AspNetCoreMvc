@@ -1,5 +1,4 @@
 ﻿using Cinema.Application.Interfaces;
-using Cinema.Application.PdfGenerator;
 using Cinema.Application.Reservation.Commands.DeleteReservation;
 using Cinema.Application.Reservation.Commands.UpdateIsConfirmed;
 using Cinema.Application.Reservation.Commands.UpdateIsPaidFor;
@@ -97,27 +96,20 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
 
             await _mediator.Send(new UpdateIsPaidForReservationCommand() { Id = getPaymentFormQuery.Id });
 
-            //Add Email Sender
+            //Add EmailSender
 
             this.SetNotificaton("success", "Payment confirmed.");
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult GeneratePdfAndPrint(Guid id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GeneratePdfAndPrint(Guid id)
         {
-            // Pobierz dane biletu na podstawie id
-            var ticketData = new TicketData();
+            MemoryStream pdfStream = await _pdfGeneratorService.GeneratePdf(id);
 
-            ticketData.Id = id;
-
-            // Wygeneruj plik PDF
-            string fileName = $"Ticket_{id}.pdf";
-            _pdfGeneratorService.GenerateTicketPdf(fileName, ticketData);
-
-            // Zwróć plik PDF jako odpowiedź HTTP
-            byte[] fileBytes = System.IO.File.ReadAllBytes(fileName);
-            return File(fileBytes, "application/pdf", fileName);
+            return File(pdfStream, "application/pdf", "Ticket.pdf");
         }
     }
 }

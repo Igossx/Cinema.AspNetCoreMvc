@@ -53,9 +53,7 @@
                 <div class="text-center">
                     @if (Model.IsPaidFor)
                     {
-                        <a asp-action="GeneratePdfAndPrint" asp-controller="Reservations" asp-route-id="@Model.Id" class="btn btn-outline-success flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">
-                            Drukuj bilet
-                        </a>
+                        <a id="printTicketButton" href="#" class="btn btn-outline-success flex-shrink-0 ml-3 d-inline-block" style="margin-left: 8px;">Drukuj bilet</a>
                     }
                     else
                     {
@@ -84,3 +82,39 @@
     <partial name="_ReservationConfirmationModal" model="@Model" />
 
 </section>
+
+<script>
+    document.getElementById("printTicketButton").addEventListener("click", function (event) {
+        event.preventDefault(); // Zapobiega domyślnej akcji przekierowania
+
+        // Wywołanie akcji kontrolera generującej i drukującej PDF
+        fetch('/Reservations/GeneratePdfAndPrint?id=@Model.Id', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.getElementsByName("__RequestVerificationToken")[0].value // Token zabezpieczenia CSRF
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Jeśli odpowiedź jest poprawna, uruchom pobieranie pliku PDF
+                    return response.blob();
+                }
+                throw new Error('Wystąpił błąd podczas generowania PDF.');
+            })
+            .then(blob => {
+                // Utwórz link do pobrania pliku PDF
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Ticket.pdf'; // Nazwa pliku PDF
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                // Obsłuż błąd
+                console.error('Błąd:', error);
+            });
+    });
+</script>

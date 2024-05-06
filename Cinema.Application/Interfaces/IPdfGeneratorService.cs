@@ -1,9 +1,7 @@
-﻿using Cinema.Application.PdfGenerator;
-
-namespace Cinema.Application.Interfaces
+﻿namespace Cinema.Application.Interfaces
 {
     public interface IPdfGeneratorService
     {
-        void GenerateTicketPdf(string fileName, TicketData ticketData);
+        Task<MemoryStream> GeneratePdf(Guid id);
     }
 }
