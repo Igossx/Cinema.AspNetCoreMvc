@@ -21,5 +21,7 @@ namespace Cinema.Domain.Entities
         public TicketType TicketType { get; set; }
 
         public bool IsPaidFor { get; set; } = false;
+
+        public string? Seats { get; set; }
     }
 }

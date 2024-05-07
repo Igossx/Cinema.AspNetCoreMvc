@@ -27,8 +27,6 @@ namespace Cinema.Application.Reservation.Queries.GetReservationUser
 
             var movie = screening.Movie;
 
-            var reservedSeats = await _seatRepository.GetSeatsFromReservation(request.Id);
-
             var reservationDto = new ReservationUserDetailsDto()
             {
                 Id = reservation.Id,
@@ -41,7 +39,7 @@ namespace Cinema.Application.Reservation.Queries.GetReservationUser
                 TotalCost = reservation.TotalCost,
                 TicketType = reservation.TicketType,
                 IsPaidFor = reservation.IsPaidFor,
-                ReservedSeats = reservedSeats
+                ReservedSeats = reservation.Seats
             };
 
             return reservationDto;

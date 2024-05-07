@@ -88,13 +88,11 @@ namespace Cinema.Infrastructure.Repositories
             await _cinemaDbContext.SaveChangesAsync();
         }
 
-        public async Task<string> GetSeatsFromReservation(Guid reservationId)
+        public async Task<string> GetStringFromSeats(IEnumerable<Seat> seats)
         {
             var stringBuilder = new StringBuilder();
 
-            var allSeatsForReservation = await GetAllSeatsFromReservation(reservationId);
-
-            foreach (var seat in allSeatsForReservation)
+            foreach (var seat in seats)
             {
                 stringBuilder.Append(seat.RowSign);
                 stringBuilder.Append(seat.SeatNumber.ToString());

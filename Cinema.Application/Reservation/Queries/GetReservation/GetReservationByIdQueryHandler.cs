@@ -33,8 +33,6 @@ namespace Cinema.Application.Reservation.Queries.GetReservation
 
             var user = await _userManager.FindByIdAsync(reservation.UserId);
 
-            var reservedSeats = await _seatRepository.GetSeatsFromReservation(request.Id);
-
             var reservationDto = new ReservationDetailsDto()
             {
                 Id = reservation.Id,
@@ -49,7 +47,7 @@ namespace Cinema.Application.Reservation.Queries.GetReservation
                 ReservationTime = reservation.ReservationTime,
                 TotalCost = reservation.TotalCost,
                 TicketType = reservation.TicketType,
-                ReservedSeats = reservedSeats,
+                ReservedSeats = reservation.Seats,
                 IsPaidFor = reservation.IsPaidFor
             };
 

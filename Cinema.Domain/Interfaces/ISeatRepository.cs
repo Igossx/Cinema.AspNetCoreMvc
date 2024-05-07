@@ -13,7 +13,7 @@ namespace Cinema.Domain.Interfaces
         Task ReserveSeat(IEnumerable<Seat> seatsToReserve);
         Task AssignToReservation(IEnumerable<Seat> seatsToAssign, Guid reservationId);
         Task RemoveFromReservation(Guid reservationId);
-        Task<string> GetSeatsFromReservation(Guid reservationId);
+        Task<string> GetStringFromSeats(IEnumerable<Seat> seats);
         Task<List<Seat>> GetAllSeatsFromReservation(Guid reservationId);
     }
 }

@@ -34,6 +34,8 @@ namespace Cinema.Application.Reservation.Commands.CreateReservation
 
             var selectedSeats = await _reservationRepository.GetSelectedSeatsAsync(request.SelectedSeats);
 
+            var selectedSeatsString = await _seatRepository.GetStringFromSeats(selectedSeats);
+
             var numberOfSelectedSeats = selectedSeats.Count();
 
             await _seatRepository.ReserveSeat(selectedSeats);
@@ -46,7 +48,8 @@ namespace Cinema.Application.Reservation.Commands.CreateReservation
                 TotalCost = totalCost,
                 TicketType = request.TicketType,
                 TotalSeats = numberOfSelectedSeats,
-                UserId = currentUser.Id
+                UserId = currentUser.Id,
+                Seats = selectedSeatsString
             };
 
             await _reservationRepository.Create(reservation);

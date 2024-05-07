@@ -32,7 +32,7 @@ namespace Cinema.Application.Services
             // Tworzenie dokumentu PDF
             PdfDocument document = new PdfDocument();
 
-            document.PageSettings.Size = new SizeF(350, 225);
+            document.PageSettings.Size = new SizeF(420, 280);
 
             // Dodawanie strony do dokumentu
             PdfPage page = document.Pages.Add();
@@ -47,20 +47,22 @@ namespace Cinema.Application.Services
             barcode.Text = id.ToString();
 
             // Rysowanie kodu kreskowego na stronie PDF
-            float barcodeY = page.Size.Height - 110;
+            float barcodeY = page.Size.Height - 120;
             barcode.Draw(page.Graphics, new PointF(10, barcodeY));
 
             // Ustawienia czcionki
             PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
+            PdfFont font2 = new PdfStandardFont(PdfFontFamily.Helvetica, 22);
 
             // Rysowanie tytułu biletu
-            graphics.DrawString("Bilet", font, PdfBrushes.Black, new PointF(10, 10));
+            graphics.DrawString("Bilet", font2, PdfBrushes.Black, new PointF(10, 0));
 
             // Rysowanie danych rezerwacji
             graphics.DrawString($"Tytul filmu: {screening.Movie.Title}", font, PdfBrushes.Black, new PointF(10, 30));
             graphics.DrawString($"Data i godzina projekcji: {screening.Date.ToShortDateString()} - {screening.Time.ToString("hh\\:mm")}", font, PdfBrushes.Black, new PointF(10, 50));
             graphics.DrawString($"Kwota: {reservation.TotalCost} PLN", font, PdfBrushes.Black, new PointF(10, 70));
-            graphics.DrawString($"Adres e-mail: {email}", font, PdfBrushes.Black, new PointF(10, 90));
+            graphics.DrawString($"Miejsca: {reservation.Seats}", font, PdfBrushes.Black, new PointF(10, 90));
+            graphics.DrawString($"Adres e-mail: {email}", font, PdfBrushes.Black, new PointF(10, 110));
 
             // Zapisywanie dokumentu PDF do strumienia
             MemoryStream stream = new MemoryStream();
