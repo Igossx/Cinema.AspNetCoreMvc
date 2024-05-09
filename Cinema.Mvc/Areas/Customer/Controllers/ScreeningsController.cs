@@ -23,7 +23,7 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         // GET: Screenings/ByMovie
         public async Task<IActionResult> ByMovie(int? page, int id, DateTime? searchDate)
         {
-            const int pageSize = 2;
+            const int pageSize = 8;
 
             var allScreenings = await _mediator.Send(new GetAllScreeningsByMovieQuery() { MovieId = id });
 
@@ -44,7 +44,7 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         // GET: Screenings
         public async Task<IActionResult> Index(int? page, DateTime? searchDate, string? searchString)
         {
-            const int pageSize = 2;
+            const int pageSize = 8;
 
             var allScreenings = await _mediator.Send(new GetAllScreeningsQuery());
 

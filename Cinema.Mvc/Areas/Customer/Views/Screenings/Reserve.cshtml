@@ -224,8 +224,11 @@
 </form>
 
 <script>
+    // Pobierz wszystkie miejsca
+    const seats = document.querySelectorAll('.seat');
+
     // Dodaj obsługę kliknięcia dla paneli miejsc
-    document.querySelectorAll('.seat').forEach(seat => {
+    seats.forEach(seat => {
         seat.addEventListener('click', function () {
             // Sprawdź, czy miejsce jest zarezerwowane lub wybrane
             if (!this.classList.contains('reserved')) {
@@ -234,35 +237,22 @@
                 // Znajdź zagnieżdżony checkbox i zmień jego stan
                 const checkbox = this.querySelector('.seat-checkbox');
                 checkbox.checked = !checkbox.checked;
+                updateSeatsAppearance(); // Aktualizuj wygląd wszystkich miejsc po kliknięciu
             }
         });
-        // Pobierz wszystkie miejsca
-        const seats = document.querySelectorAll('.seat');
-
-        // Dodaj obsługę kliknięcia dla paneli miejsc
-        seats.forEach(seat => {
-            seat.addEventListener('click', function () {
-                if (!this.classList.contains('reserved')) {
-                    this.classList.toggle('selected');
-                    const checkbox = this.querySelector('.seat-checkbox');
-                    checkbox.checked = !checkbox.checked;
-                    updateSeatsAppearance(); // Aktualizuj wygląd wszystkich miejsc po kliknięciu
-                }
-            });
-        });
-
-        // Aktualizuj wygląd wszystkich miejsc na podstawie ich stanu zaznaczenia
-        function updateSeatsAppearance() {
-            seats.forEach(seat => {
-                const checkbox = seat.querySelector('.seat-checkbox');
-                if (checkbox.checked) {
-                    seat.classList.add('selected');
-                } else {
-                    seat.classList.remove('selected');
-                }
-            });
-        }
     });
+
+    // Aktualizuj wygląd wszystkich miejsc na podstawie ich stanu zaznaczenia
+    function updateSeatsAppearance() {
+        seats.forEach(seat => {
+            const checkbox = seat.querySelector('.seat-checkbox');
+            if (checkbox.checked) {
+                seat.classList.add('selected');
+            } else {
+                seat.classList.remove('selected');
+            }
+        });
+    }
 
     function showErrorAlert(errorMessage) {
         if (errorMessage && errorMessage.trim() !== '') {

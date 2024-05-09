@@ -22,7 +22,7 @@ namespace Cinema.Mvc.Areas.Customer.Controllers
         // GET: Movies
         public async Task<IActionResult> Index(int? page, string? searchString, FilmCategory? filmCategory)
         {
-            const int pageSize = 2;
+            const int pageSize = 12;
 
             var allMovies = await _mediator.Send(new GetAllMoviesQuery());
 
