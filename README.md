@@ -1,5 +1,5 @@
 # Cinema Booking System
-"Cinema Booking System" is a comprehensive web application that allows users to browse the current offer of cinema film offerings, book tickets online and manage the cinema from the administrator level.
+Cinema Booking System is a comprehensive web application that allows users to browse the current offer of cinema film offerings, book tickets online and manage the cinema from the administrator level.
 In this application, users can easily and conveniently check available screenings, select seats to be booked and print out tickets in *.pdf format.
 In addition, administrators can manage repertoires, screenings, cinema halls and user entitlements with ease, ensuring the smooth operation of the cinema.
 A project created to learn programming on the .Net platform.
@@ -22,7 +22,7 @@ A project created to learn programming on the .Net platform.
 - Syncfusion - version 15.1
 - and more
 
-### Databse
+### Database
 - Microsoft SQL Server 2017
   
 ### Architecture 
