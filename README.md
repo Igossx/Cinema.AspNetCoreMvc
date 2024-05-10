@@ -53,7 +53,7 @@ A project created to learn programming on the .Net platform.
 
 ## Project presentation
 
-## to do
+### [Title of the Featured Film](link_to_film_page)
 
 
 
