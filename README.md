@@ -1,5 +1,5 @@
 # Cinema Booking System
-"Cinema Booking System" is a comprehensive web application that allows users to browse the current offer of cinema film offerings, book tickets online and manage the cinema from the administrator level. 
+"Cinema Booking System" is a comprehensive web application that allows users to browse the current offer of cinema film offerings, book tickets online and manage the cinema from the administrator level.
 In this application, users can easily and conveniently check available screenings, select seats to be booked and print out tickets in pdf format. 
 In addition, administrators can manage repertoires, screenings, cinema halls and user entitlements with ease, ensuring the smooth operation of the cinema.
 A project created to learn programming on the .Net platform.
@@ -14,6 +14,8 @@ A project created to learn programming on the .Net platform.
 ## Technologies Used
 - .Net - version 7.0
 - Asp Net Core - version 7.0.3
+- HTML5 and CSS3
+- Java Script - ES12
 - MediatR - version 12.0.1
 - Entity Framework Core - version 7.0.3
 - Fluent Validation - version 11.0
@@ -32,10 +34,14 @@ A project created to learn programming on the .Net platform.
 ## Features
 
 ### User funcionalities
-- Register user account
-- Login to user account
-- Delete user account
-- Get users accounts
+- viewing of films
+- viewing of screenings
+- filtering films and projections
+- view own bookings
+- possibility of seat reservation
+- pay for bookings
+- print tickets
+- log-in and registration
 
 ### Admin funcionalities
 - Create comment
