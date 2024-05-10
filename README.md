@@ -1,6 +1,6 @@
 # Cinema Booking System
 "Cinema Booking System" is a comprehensive web application that allows users to browse the current offer of cinema film offerings, book tickets online and manage the cinema from the administrator level.
-In this application, users can easily and conveniently check available screenings, select seats to be booked and print out tickets in pdf format. 
+In this application, users can easily and conveniently check available screenings, select seats to be booked and print out tickets in *.pdf format.
 In addition, administrators can manage repertoires, screenings, cinema halls and user entitlements with ease, ensuring the smooth operation of the cinema.
 A project created to learn programming on the .Net platform.
 
@@ -36,7 +36,7 @@ A project created to learn programming on the .Net platform.
 ### User funcionalities
 - viewing of films
 - viewing of screenings
-- filtering films and projections
+- filtering movies and screenings
 - view own bookings
 - possibility of seat reservation
 - pay for bookings
@@ -44,12 +44,12 @@ A project created to learn programming on the .Net platform.
 - log-in and registration
 
 ### Admin funcionalities
-- Create comment
-- Delete comment
-- Update comment
-- Get comments
-- Get comment by Id
-- Get comments by DateQuery
+- adding, deleting and editing movies
+- adding, deleting and editing screenings
+- adding, deleting and editing cinemas
+- adding, deleting and editing bookings
+- changing user roles
+- log-in and registration
 
 ## Project presentation
 
