@@ -33,7 +33,7 @@ A project created to learn programming on the .Net platform.
 
 ## Features
 
-### User funcionalities
+**User funcionalities**
 - viewing of films
 - viewing of screenings
 - filtering movies and screenings
@@ -43,7 +43,7 @@ A project created to learn programming on the .Net platform.
 - print tickets
 - log-in and registration
 
-### Admin funcionalities
+**Admin funcionalities**
 - adding, deleting and editing movies
 - adding, deleting and editing screenings
 - adding, deleting and editing cinemas
