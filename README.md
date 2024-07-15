@@ -53,9 +53,9 @@ A project created to learn programming on the .Net platform.
 
 ## Project presentation
 
+**YouTube video**
+
 ### [ASP NET CORE MVC, Cinema Ticket Booking App with CQRS and MediatR](https://www.youtube.com/watch?v=JWXmKoB8IEk)
-
-
 
 ## Project Status
 Project is: **Finished**.
